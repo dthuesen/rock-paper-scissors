@@ -8,6 +8,18 @@ This project uses Angular 4.0.0
 + **...use it with the current version of the CLI installed globally (for running it in dev-environment)**
 + **...or start the build version from the 'dist' folder (standalone)**
 
+### Setting the base tag for a sub-folder on a webserver at build time:
+
+
+Usage: `ng build --base-href <base>` 
+- or `ng build --base-href /myUrl/` 
+- or `ng build --bh /myUrl/` 
+- or `ng build --prod --bh /myUrl/`
+
+Example: `ng build --base-href home`
+
+Replaces `<base href="/">` with <`base href="/home">` in index.html
+ 
 
 
 
