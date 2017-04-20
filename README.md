@@ -25,6 +25,185 @@ Replaces `<base href="/">` with <`base href="/home">` in index.html
 
 ---
 
+## Ideas for implementing the logic
+
+**1. idea: game as array**
+
+The idea is, that all game pieces are following in a line. the first will be beaten by the second, the second by the third, the third by the first. In other words like this:
+
+    ROCK by PAPER by SCISSORS by ROCK
+    
+or
+    
+    0 by 1 by 2 by 3 by 0   =   [0, 1, 2, 3, 0]
+    
+With this the implementation of deciding the winner it might be do it with two if's:
+
+    order = [0, 1, 2, 0]
+    1. if (order[player] === order[computer])`        => TIE!
+    2. if (order[player] === order[computer + 1])     => PLAYER WON!
+    3. else                                           => COMPUTER WON!
+    
+If the list gets longer:  `MATCH by ROCK by PAPER by SCISSORS by FOUNTAIN by MATCH` is will work as well.
+But then there is a second lane to be considered too: `MATCH by SCISSORS by FOUNTAIN` and in that case it would lead to a third if statement:
+
+    0 = MATCH
+    1 = ROCK
+    2 = PAPER
+    3 = SCISSORS
+    4 = FOUNTAIN
+
+    order = [0, 1, 2, 3, 4, 0]
+    1. if (order[player] === order[computer])`        => TIE!
+    2. if (order[player] === order[computer + 1])     => PLAYER WON!
+    2. if (order[player] === order[computer + 2])     => PLAYER WON! 
+          /**  because the player also wins with the difference of 2 (before addition of 1)  **/
+    3. else                                           => COMPUTER WON!
+    
+But here is a little problem, if the computer choses MATCH and the player chooses PAPER, normally the computer would win. But not with this three if's. There's another if necessary and then the code will get messy and unclear. The solution could be to find a way calculate the worth of a game and put it in a switch statement - see second idea.
+
+This is how the implementation of the logic to find the winner could look like:
+```
+order = [0, 1, 2, 3, 4, 0];
+
+  constructor() {
+    this.choose(0, 2);
+  }
+
+  choose(player: number, computer: number) {
+    if (this.order[player] === this.order[computer]) {
+      return 'The game is tied.';
+    }
+    if (this.order[player] === this.order[computer + 1]) {
+      playerScore++;
+      return 'Player won!';
+    } 
+    if (this.order[player] === this.order[computer + 2]) {
+      playerScore++;
+      return 'Player won!';
+    } else {
+      computerScore++;
+      return 'Computer won!'
+    }
+  };
+
+```
+**2. idea: the value of a game**
+
+Every piece has a number. Adding two number makes the value of the game. Every value stands as a code for a winner according to that pair. To implement it a switch statement will be the way:
+
+Example 1: for three game pieces:
+
+    Scissors = 1
+    Paper    = 2
+    Rock     = 3
+
+    Game pair A -> 1 (Scissors) + 2 (Paper) = 3 (winner Scissors) 
+    Game pair B -> 2 (Paper) + 3 (Rock)     = 5 (winner Paper)
+    Game pair C -> 3 (Rock) + 1 (Scissors)  = 4 (winner Rock)
+    
+    This makes 3 cases plus a tie game.
+
+Example 2: would the list of pieces be added by two new pieces, it the pairing would be this:
+
+    Scissors = 1
+    Paper    = 2
+    Rock     = 3
+    Fountain = 5    // higher numbers taken for
+    Match    = 9    // not having doubles in addition
+
+    Game pair A -> 1 (Scissors) + 2 (Paper)     = 3 (winner Scissors) 
+    Game pair B -> 2 (Paper) + 3 (Rock)         = 5 (winner Paper)
+    Game pair C -> 3 (Rock) + 1 (Scissors)      = 4 (winner Rock)
+    
+    Game pair D -> 1 (Scissors) + 5 (Fountain)  = 6  (winner Fountain)
+    Game pair E -> 1 (Scissors) + 9 (Match)     = 10 (winner Scissors)
+    Game pair F -> 2 (Paper) + 5 (Fountain)     = 7  (winner Paper)
+    Game pair G -> 2 (Paper) + 9 (Match)        = 11 (winner Match)
+    Game pair H -> 3 (Rock) + 5 (Fountain)      = 8  (winner Rock)
+    Game pair H -> 3 (Rock) + 9 (Match)         = 12 (winner Rock)
+    
+    This would make 9 cases plus one tie game. 
+    
+Example 3: making the list even longer by two additional pieces (it's getting complicated):
+
+    (This is not a serious version, only for finding additional numbers)
+
+    Scissors = 1    // beats Lizard, Paper, Match
+    Paper    = 2    // beats Rock, Spock, Fountain
+    Rock     = 3    // beats Lizard, Scissors, Match
+              gap: 2
+    Fountain = 5    // beats Rock, Scissors, Lizard
+              gap: 4           
+    Match    = 9    // beats Paper, Fountain, Spock
+              gap: 6      
+    Lizard   = 15   // beats Spock, Paper, Match
+              gap: 8
+    Spock    = 23   // beats Scissors, Rock, Fountain
+    
+The gaps where manually tried out but now there's a rule visible. The gap between each number after the first three increases by 2. 
+    
+
+    Game pair A -> 1 (Scissors) + 2 (Paper)     = 3 (winner Scissors) 
+    Game pair B -> 2 (Paper) + 3 (Rock)         = 5 (winner Paper)
+    Game pair C -> 3 (Rock) + 1 (Scissors)      = 4 (winner Rock)
+    
+    Game pair D -> 1 (Scissors) + 5 (Fountain)  = 6  (winner Fountain)
+    Game pair E -> 1 (Scissors) + 9 (Match)     = 10 (winner Scissors)
+    Game pair F -> 1 (Scissors) + 15 (Lizard)   = 16 (winner Scissors)
+    Game pair G -> 1 (Scissors) + 23 (Spock)    = 24 (winner Spock)
+    Game pair H -> 2 (Paper) + 5 (Fountain)     = 7  (winner Paper)
+    Game pair I -> 2 (Paper) + 9 (Match)        = 11 (winner Match)
+    Game pair J -> 2 (Paper) + 15 (Lizard)      = 17 (winner Lizard)
+    Game pair K -> 2 (Paper) + 23 (Spock)       = 25 (winner Paper)
+    Game pair L -> 3 (Rock) + 5 (Fountain)      = 8  (winner Rock)
+    Game pair M -> 3 (Rock) + 9 (Match)         = 12 (winner Rock)
+    Game pair N -> 3 (Rock) + 15 (Lizard)       = 18 (winner Rock)
+    Game pair O -> 3 (Rock) + 23 (Spock)        = 26 (winner Spock)
+    Game pair P -> 5 (Fountain) + 15 (Lizard)   = 20 (winner Fountain)
+    Game pair Q -> 5 (Fountain) + 23 (Spock)    = 28 (winner Spock)
+    
+    This would make 17 cases plus one tie game. 
+    
+The advantage of idea 2 is this pairing is that the list can be endless (ok, the code for each pair would be endless too ;-) )
+    
+The implementation for example 1:
+
+```
+switch (valueOfPair) {
+  case 3:
+    win = "scissors"
+    if (player === winner) { 
+      playerScore++;
+      return 'Player won!';
+    }
+    return 'Computer won';
+  case 5:
+    win = "paper"
+    if (player = winner) {
+      playerScore++;
+      return 'Player won!';
+    }
+    return 'Computer won';
+  case 4:
+    win = "rock"
+    if (player = winner) {
+      playerScore++;
+      return 'Player won!';
+    }
+    return 'Computer won';
+  default:
+    return 'It's a tight game!';
+}
+```
+
+ So, my favorite for implementation is idea 2. But with that there is also a drawback: I'm not sure if the rule of increasing the number for each piece by 2 really works with a longer list or even endless list. But that's not the purpose of this app.
+
+
+
+
+---
+
 ## Text from original README file to Angular Cli
 
 ### Development server
