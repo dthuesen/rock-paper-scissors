@@ -69,75 +69,129 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
       }));
     });
 
-    xdescribe('Gamelogic', () => {
+    describe('Gamelogic', () => {
 
       beforeEach(function(done) {
         done();
       });
-      
-      it(`should have a property title 'Schere, Stein, Papier'`, async( () => {
-        const app = fixture.debugElement.componentInstance;
-        expect(app.title).toEqual('Schere, Stein, Papier');
-      }));
 
-      it(`should have a property 'playersScore'`, async( () => {
-        const app = fixture.debugElement.componentInstance;
-        expect(app.playersScore).not.toBe(undefined);
-      }));
+      xdescribe('Properties', () => {
 
-      it(`should have a property 'computersScore'`, async( () => {
-        const app = fixture.debugElement.componentInstance;
-        expect(app.computersScore).not.toBe(undefined);
-      }));
+        it(`should have a property title: 'Schere, Stein, Papier'`, async( () => {
+          const app = fixture.debugElement.componentInstance;
+          expect(app.title).toEqual('Schere, Stein, Papier');
+        }));
 
-      it(`should have a property 'playersChoice'`, async( () => {
-        const app = fixture.debugElement.componentInstance;
-        expect(app.playersChoice).not.toBe(undefined);
-      }));
+        it(`should have a property 'playersScore'`, async( () => {
+          const app = fixture.debugElement.componentInstance;
+          expect(app.playerText).toBeTruthy;
+          expect(app.playersScore).not.toBe(undefined);
+        }));
 
-      it(`should have a property 'computersChoice'`, async( () => {
-        const app = fixture.debugElement.componentInstance;
-        expect(app.computersChoice).not.toBe(undefined);
-      }));
+        it(`should have a property 'computersScore'`, async( () => {
+          const app = fixture.debugElement.componentInstance;
+          expect(app.playerText).toBeTruthy;
+          expect(app.computersScore).not.toBe(undefined);
+        }));
 
-      it(`should have an output 'computerText'`, async( () => {
-        const app = fixture.debugElement.componentInstance;
-        expect(app.computerText).not.toBe(undefined);
-      }));
+        it(`should have a property 'playersChoice'`, async( () => {
+          const app = fixture.debugElement.componentInstance;
+          expect(app.playerText).toBeTruthy;
+          expect(app.playersChoice).not.toBe(undefined);
+        }));
 
-      it(`should have a method 'startGame'`, async( () => {
-        const app = fixture.debugElement.componentInstance;
-        expect(app.startGame).not.toBe(undefined);
-      }));
+        it(`should have a property 'computersChoice'`, async( () => {
+          const app = fixture.debugElement.componentInstance;
+          expect(app.playerText).toBeTruthy;
+          expect(app.computersChoice).not.toBe(undefined);
+        }));
 
-      it(`should have a method 'displayStartHeadlines()'`, async( () => {
-        const app = fixture.debugElement.componentInstance;
-        expect(app.displayStartHeadlines).not.toBe(undefined);
-      }));
+        it(`should have a property 'playerText'`, async( () => {
+          const app = fixture.debugElement.componentInstance;
+          expect(app.playerText).toBeTruthy;
+          expect(app.playersScore).not.toBe(undefined);
+        }));
 
-      it(`should have a method 'setPlayersChoice()'`, async( () => {
-        fixture.detectChanges();
-        const app = fixture.debugElement.componentInstance;
-        expect(app.setPlayersChoice).not.toBe(undefined);
-      }));
+        it(`should have a property 'computerText'`, async( () => {
+          const app = fixture.debugElement.componentInstance;
+          expect(app.computerText).toBeTruthy;
+          expect(app.playersScore).not.toBe(undefined);
+        }));
 
-      it(`should have a method 'countdown()'`, async( () => {
-        fixture.detectChanges();
-        const app = fixture.debugElement.componentInstance;
-        expect(app.countdown).not.toBe(undefined);
-      }));
+        it(`should have a property 'computerText'`, async( () => {
+          const app = fixture.debugElement.componentInstance;
+          expect(app.computerText).not.toBe(undefined);
+        }));
 
-      it(`should have a method 'newGame()'`, async( () => {
-        fixture.detectChanges();
-        const app = fixture.debugElement.componentInstance;
-        expect(app.newGame).not.toBe(undefined);
-      }));
+      });
 
-      it(`should have a method 'randomNumber()'`, async( () => {
-        fixture.detectChanges();
-        const app = fixture.debugElement.componentInstance;
-        expect(app.randomNumber).not.toBe(undefined);
-      }));
+      describe('Methods', () => {
+
+        it(`should have a method 'startGame'`, async( () => {
+          const app = fixture.debugElement.componentInstance;
+          expect(app.startGame).not.toBe(undefined);
+        }));
+
+        it(`should have a method 'displayStartHeadlines()'`, async( () => {
+          const app = fixture.debugElement.componentInstance;
+          expect(app.displayStartHeadlines).not.toBe(undefined);
+        }));
+
+        it(`displayStartHeadlines() should set the right start headlines`, async( () => {
+          fixture.detectChanges();
+          const computerText = 'Computer is waiting';
+          const playerText   = 'Spiel deine Hand!';
+          const app = fixture.debugElement.componentInstance;
+          app.displayStartHeadlines();
+          expect(app.computerText === computerText).toBe(true);
+          expect(app.playerText === playerText).toBe(true);
+        }));
+
+        it(`should have a method 'setPlayersChoice()'`, async( () => {
+          fixture.detectChanges();
+          const app = fixture.debugElement.componentInstance;
+          expect(app.setPlayersChoice).not.toBe(undefined);
+        }));
+
+        it(`should have a method 'setComputersChoice()'`, async( () => {
+          fixture.detectChanges();
+          const app = fixture.debugElement.componentInstance;
+          expect(app.setComputersChoice).not.toBe(undefined);
+        }));
+
+        it(`should have a method 'setComputersChoiceText()'`, async( () => {
+          fixture.detectChanges();
+          const app = fixture.debugElement.componentInstance;
+          expect(app.setComputersChoiceText).not.toBe(undefined);
+        }));
+
+        it(`setComputersChoiceText(number) should translate given number into expected text`, () => {
+          fixture.detectChanges();
+          const computerText = 'Computer spielt: Schere';
+          const app = fixture.debugElement.componentInstance;
+          app.setComputersChoiceText(1);
+          expect(app.computerText === computerText).toBe(true);
+        });
+
+        it(`should have a method 'countdown()'`, async( () => {
+          fixture.detectChanges();
+          const app = fixture.debugElement.componentInstance;
+          expect(app.countdown).not.toBe(undefined);
+        }));
+
+        it(`should have a method 'randomNumber()'`, async( () => {
+          fixture.detectChanges();
+          const app = fixture.debugElement.componentInstance;
+          expect(app.randomNumber).not.toBe(undefined);
+        }));
+
+        it(`should have a method 'newGame()'`, async( () => {
+          fixture.detectChanges();
+          const app = fixture.debugElement.componentInstance;
+          expect(app.newGame).not.toBe(undefined);
+        }));
+
+      });
 
     });
 
