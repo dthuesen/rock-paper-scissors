@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-player',
@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerComponent implements OnInit {
 
-  constructor() { }
+  @Output() choiceSet = new EventEmitter();
+
+  title: String = '';
+  buttons = {
+    'Stein': false,
+    'Papier': false,
+    'Schere': false
+  };
+
+  constructor() {}
 
   ngOnInit() {
+  }
+
+  setPlayersChoice(choice) {
+    console.log('The choice is: ', choice);
+    this.choiceSet.emit(choice);
   }
 
 }

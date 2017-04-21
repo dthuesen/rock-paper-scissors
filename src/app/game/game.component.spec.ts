@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ComputerComponent } from '../computer/computer.component';
@@ -7,7 +7,7 @@ import { PlayerComponent } from '../player/player.component';
 import { ScoreComponent } from '../score/score.component';
 import { WinnerDisplayComponent } from '../winner-display/winner-display.component';
 
-describe('Rock, Paper, Stone Game', () => {
+describe('Rock, Paper, Stone Game - GameComponent (container component)', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,7 +22,7 @@ describe('Rock, Paper, Stone Game', () => {
     .compileComponents();
   }));
 
-  describe('GameComponent (container component)', () => {
+  describe('Component parts', () => {
     let component: GameComponent;
     let fixture: ComponentFixture<GameComponent>;
 
@@ -32,46 +32,54 @@ describe('Rock, Paper, Stone Game', () => {
       fixture.detectChanges();
     });
 
-    it('should create', () => {
+    xit('should create', () => {
       expect(component).toBeTruthy();
     });
 
-    it(`should have a property title 'Stein, Schere, Papier'`, async( () => {
-      const app = fixture.debugElement.componentInstance;
-      expect(app.title).toEqual('Stein, Schere, Papier');
-    }));
+    xdescribe('Game view', () => {
 
-    it('should render title in a h1 tag', async( () => {
-      fixture.detectChanges();
-      const compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelector('h1').textContent).toContain('Stein, Schere, Papier');
-    }));
+      it('should render title in a h1 tag', async( () => {
+        fixture.detectChanges();
+        const compiled = fixture.debugElement.nativeElement;
+        expect(compiled.querySelector('h1').textContent).toContain('Schere, Stein, Papier');
+      }));
 
-    it('should be able to render PlayerComponent tag (<app-player>)', async( () => {
-      fixture.detectChanges();
-      const compiled = fixture.debugElement.query(By.css('app-player'));
-      expect(compiled).not.toBe(null);
-    }));
+      it('should be able to render PlayerComponent tag (<app-player>)', async( () => {
+        fixture.detectChanges();
+        const compiled = fixture.debugElement.query(By.css('app-player'));
+        expect(compiled).not.toBe(null);
+      }));
 
-    it('should be able to render ComputerComponent tag (<app-computer>)', async( () => {
-      fixture.detectChanges();
-      const compiled = fixture.debugElement.query(By.css('app-computer'));
-      expect(compiled).not.toBe(null);
-    }));
+      it('should be able to render ComputerComponent tag (<app-computer>)', async( () => {
+        fixture.detectChanges();
+        const compiled = fixture.debugElement.query(By.css('app-computer'));
+        expect(compiled).not.toBe(null);
+      }));
 
-    it('should be able to render ComputerComponent tag (<app-winner-display>)', async( () => {
-      fixture.detectChanges();
-      const compiled = fixture.debugElement.query(By.css('app-winner-display'));
-      expect(compiled).not.toBe(null);
-    }));
+      it('should be able to render ComputerComponent tag (<app-winner-display>)', async( () => {
+        fixture.detectChanges();
+        const compiled = fixture.debugElement.query(By.css('app-winner-display'));
+        expect(compiled).not.toBe(null);
+      }));
 
-    it('should be able to render ComputerComponent tag (<app-score>)', async( () => {
-      fixture.detectChanges();
-      const compiled = fixture.debugElement.query(By.css('app-score'));
-      expect(compiled).not.toBe(null);
-    }));
+      it('should be able to render ComputerComponent tag (<app-score>)', async( () => {
+        fixture.detectChanges();
+        const compiled = fixture.debugElement.query(By.css('app-score'));
+        expect(compiled).not.toBe(null);
+      }));
+    });
 
-    describe('Gamelogic', () => {
+    xdescribe('Gamelogic', () => {
+
+      beforeEach(function(done) {
+        done();
+      });
+      
+      it(`should have a property title 'Schere, Stein, Papier'`, async( () => {
+        const app = fixture.debugElement.componentInstance;
+        expect(app.title).toEqual('Schere, Stein, Papier');
+      }));
+
       it(`should have a property 'playersScore'`, async( () => {
         const app = fixture.debugElement.componentInstance;
         expect(app.playersScore).not.toBe(undefined);
@@ -92,16 +100,122 @@ describe('Rock, Paper, Stone Game', () => {
         expect(app.computersChoice).not.toBe(undefined);
       }));
 
+      it(`should have an output 'computerText'`, async( () => {
+        const app = fixture.debugElement.componentInstance;
+        expect(app.computerText).not.toBe(undefined);
+      }));
+
       it(`should have a method 'startGame'`, async( () => {
         const app = fixture.debugElement.componentInstance;
-        console.log(app.startGame);
         expect(app.startGame).not.toBe(undefined);
       }));
+
+      it(`should have a method 'displayStartHeadlines()'`, async( () => {
+        const app = fixture.debugElement.componentInstance;
+        expect(app.displayStartHeadlines).not.toBe(undefined);
+      }));
+
+      it(`should have a method 'setPlayersChoice()'`, async( () => {
+        fixture.detectChanges();
+        const app = fixture.debugElement.componentInstance;
+        expect(app.setPlayersChoice).not.toBe(undefined);
+      }));
+
+      it(`should have a method 'countdown()'`, async( () => {
+        fixture.detectChanges();
+        const app = fixture.debugElement.componentInstance;
+        expect(app.countdown).not.toBe(undefined);
+      }));
+
+      it(`should have a method 'newGame()'`, async( () => {
+        fixture.detectChanges();
+        const app = fixture.debugElement.componentInstance;
+        expect(app.newGame).not.toBe(undefined);
+      }));
+
+      it(`should have a method 'randomNumber()'`, async( () => {
+        fixture.detectChanges();
+        const app = fixture.debugElement.componentInstance;
+        expect(app.randomNumber).not.toBe(undefined);
+      }));
+
     });
 
+    xdescribe('Gamelogic - timing tests', () => {
+
+        beforeEach(function(done) {
+          done();
+        });
+
+        it(`After 0.8s the method countdown() should set property 'computerText' to 'Schere'`,  (done) => {
+          fixture.detectChanges();
+          const app = fixture.debugElement.componentInstance;
+          app.countdown();
+          setTimeout( () => {
+            expect(app.computerText).toContain('Schere');
+            done();
+          }, 800);
+        });
+
+        it(`After 2.5s the method countdown() should set property 'computerText' to 'Stein'`,  (done) => {
+          fixture.detectChanges();
+          const app = fixture.debugElement.componentInstance;
+          app.countdown();
+          setTimeout( () => {
+            expect(app.computerText).toContain('Stein');
+            done();
+          }, 2500);
+        });
+
+        it(`After 3.5s the method countdown() should set property 'computerText' to 'Papier'`,  (done) => {
+          fixture.detectChanges();
+          const app = fixture.debugElement.componentInstance;
+          app.countdown();
+          setTimeout( () => {
+            expect(app.computerText).toContain('Papier');
+            done();
+          }, 3500);
+        });
+
+        it(`Before 0.8s the property 'computerText' should be empty`,  (done) => {
+          fixture.detectChanges();
+          const app = fixture.debugElement.componentInstance;
+          app.countdown();
+          setTimeout( () => {
+            expect(app.computerText).toEqual('');
+            done();
+          }, 795);
+        });
+
+        it(`Before 2.5s the property 'computerText' should NOT contain 'Stein'`,  (done) => {
+          fixture.detectChanges();
+          const app = fixture.debugElement.componentInstance;
+          console.log('app.computerText:' + '"' + app.computerText + '"');
+          app.countdown();
+          setTimeout( () => {
+            expect(app.computerText).not.toContain('Stein');
+            console.log('app.computerText:' + '"' + app.computerText + '"');
+            done();
+          }, 2499);
+        });
+
+        it(`Before 3.5s the property 'computerText' should NOT contain 'Papier'`,  (done) => {
+          fixture.detectChanges();
+          const app = fixture.debugElement.componentInstance;
+          console.log('app.computerText:' + '"' + app.computerText + '"');
+          app.countdown();
+          setTimeout( () => {
+            expect(app.computerText).not.toContain('Papier');
+            console.log('app.computerText:' + '"' + app.computerText + '"');
+            done();
+          }, 3499);
+        });
+
+    });
   });
 
-  describe('Child components of GameComponent', () => {
+
+  xdescribe('Child components of GameComponent', () => {
 
     it('should have a defined PlayerComponent', () => {
       let fixture: ComponentFixture<PlayerComponent>;

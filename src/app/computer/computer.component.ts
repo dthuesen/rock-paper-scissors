@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-computer',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./computer.component.css']
 })
 export class ComputerComponent implements OnInit {
+
+  @Input('computerDisplayText') computerDisplayText: string;
 
   constructor() { }
 
