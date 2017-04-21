@@ -9,10 +9,11 @@ import { PlayerComponent } from '../player/player.component';
 export class GameComponent {
 
   title = 'Schere, Stein, Papier';
-  playersScore     = '';
-  computersScore   = '';
-  playersChoice:   number = null;
-  computersChoice: number = null;
+  playersScore      = 0;
+  computersScore    = 0;
+  playersChoice:    number = null;
+  computersChoice:  number = null;
+  winnerDisplayText = '';
 
   playerText       = '';
   computerText     = '';
@@ -37,18 +38,21 @@ export class GameComponent {
   // events more readable.
   setPlayersChoice(choice) {
     console.log('In GameComponent players choice: ', choice);
-
+    this.computerText = 'Abzählen...';
     switch (choice) {
       case 'rock':
         this.playersChoice = 1;
+        this.playerText = 'Du spielst Stein.';
         this.countdown();
         break;
       case 'paper':
         this.playersChoice = 2;
+        this.playerText = 'Du spielst Papier.';
         this.countdown();
         break;
       case 'scissors':
         this.playersChoice = 3;
+        this.playerText = 'Du spielst Schere.';
         this.countdown();
         break;
     }
@@ -61,20 +65,21 @@ export class GameComponent {
     const number = this.randomNumber();
     this.computersChoice = number;
     this.setComputersChoiceText(number);
+    this.calculateWinner(this.playersChoice, this.computersChoice);
   }
 
   // (T) translates the computers choice (number) into text
-  setComputersChoiceText(number) {
+  setComputersChoiceText(number: number) {
 
     switch (number) {
       case 1:
-        this.computerText = 'Computer spielt: Schere';
+        this.computerText = 'Computer spielt Stein';
         break;
       case 2:
-        this.computerText = 'Computer spielt: Stein';
+        this.computerText = 'Computer spielt Papier';
         break;
       case 3:
-        this.computerText = 'Computer spielt: Papier';
+        this.computerText = 'Computer spielt Schere';
         break;
     }
     console.log('Set computers choice: ', this.computerText);
@@ -101,6 +106,48 @@ export class GameComponent {
   randomNumber() {
     return Math.floor(Math.random() * 3) + 1;
   }
+
+  calculateWinner(player: number, computer: number) {
+    const value = player + computer;
+    switch (value) {
+      case 3:
+        if (player > computer) {
+          this.winnerDisplayText = 'Papier wickelt den Stein ein. \n Du gewinnst!';
+          this.playersScore = this.playersScore + 1;
+        } else {
+          this.winnerDisplayText = 'Papier wickelt den Stein ein. \n Computer gewinnt!';
+          this.computersScore = this.computersScore + 1;
+        }
+        break;
+      case 5:
+        if (player > computer) {
+          this.winnerDisplayText = 'Schere schneidet Papier. \n Du gewinnst!';
+          this.playersScore = this.playersScore + 1;
+        } else {
+          this.winnerDisplayText = 'Schere schneidet Papier. \n Computer gewinnt!';
+          this.computersScore = this.computersScore + 1;
+        }
+        break;
+      case 4:
+        if (player < computer) {
+          this.winnerDisplayText = 'Stein macht die Schere stumpf. \n Du gewinnst!';
+          this.playersScore = this.playersScore + 1;
+        } else {
+          this.winnerDisplayText = 'Stein macht die Schere stumpf. \n Computer gewinnt!';
+          this.computersScore = this.computersScore + 1;
+        }
+        break;
+      default:
+        this.winnerDisplayText = 'Ihr habt beide das Gleiche gezogen. \n Unentschieden!';
+    }
+    console.log(`Score - Du: ${this.playersScore} : ${this.computersScore} Computer `);
+  }
+
+  // displayWinner() {
+  //   setTimeout(function() {
+  //     // TODO
+  //   }, 2000);
+  // }
 
   // Resets the counter and starts a new game
   newGame() {

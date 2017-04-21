@@ -165,11 +165,25 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
           expect(app.setComputersChoiceText).not.toBe(undefined);
         }));
 
-        it(`setComputersChoiceText(number) should translate given number into expected text`, () => {
+        it(`setComputersChoiceText(1) should translate 'Computer spielt Schere'`, () => {
           fixture.detectChanges();
-          const computerText = 'Computer spielt: Schere';
+          const computerText = 'Computer spielt Schere';
           const app = fixture.debugElement.componentInstance;
           app.setComputersChoiceText(1);
+          expect(app.computerText === computerText).toBe(true);
+        });
+        it(`setComputersChoiceText(2) should translate 'Computer spielt Stein'`, () => {
+          fixture.detectChanges();
+          const computerText = 'Computer spielt Stein';
+          const app = fixture.debugElement.componentInstance;
+          app.setComputersChoiceText(2);
+          expect(app.computerText === computerText).toBe(true);
+        });
+        it(`setComputersChoiceText(3) should translate 'Computer spielt Papier'`, () => {
+          fixture.detectChanges();
+          const computerText = 'Computer spielt Papier';
+          const app = fixture.debugElement.componentInstance;
+          app.setComputersChoiceText(3);
           expect(app.computerText === computerText).toBe(true);
         });
 

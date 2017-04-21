@@ -1,6 +1,6 @@
 <h1>{{title}}</h1>
 
-<app-player (choiceSet)="setPlayersChoice($event)"></app-player>
+<app-player [playerDisplayText]="playerText" (choiceSet)="setPlayersChoice($event)"></app-player>
 <app-computer [computerDisplayText]="computerText"></app-computer>
-<app-winner-display></app-winner-display>
-<app-score></app-score>
+<app-winner-display [winnerDisplayText]="winnerDisplayText"></app-winner-display>
+<app-score [playersScore]="playersScore" [computersScore]="computersScore" ></app-score>
