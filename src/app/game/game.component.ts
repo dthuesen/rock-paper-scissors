@@ -88,7 +88,7 @@ export class GameComponent {
 
   // (T) Simulates the countdown 'Schere, Stein, Papier'
   // and sets it as text to display later in game component
- 
+
   countdown() {
     // let timeout;
     // timeout = setTimeout( () => {
@@ -108,6 +108,22 @@ export class GameComponent {
     // timeout = setTimeout( () => {
     //   this.setComputersChoice();
     // }, 4500);
+
+    setTimeout( () => {
+      this.computerText = 'Schere';
+    }, 800);
+
+    setTimeout( () => {
+      this.computerText = 'Stein';
+    }, 2500);
+
+    setTimeout( () => {
+      this.computerText = 'Papier';
+    }, 3500);
+
+    setTimeout( () => {
+      this.setComputersChoice();
+    }, 4500);
   }
 
   // (T) Simulates the computers choice

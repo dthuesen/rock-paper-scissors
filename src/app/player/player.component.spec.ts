@@ -98,7 +98,7 @@ describe('PlayerComponent', () => {
     });
 
     /**
-     *  This test suite is disabled because it has 
+     *  This test suite is disabled because it has
      *  interferences with tests suites:
      *
      *  - PlayerComponent / player - properties
@@ -106,7 +106,7 @@ describe('PlayerComponent', () => {
      *
      *  This or the others must be disabled for testing!
      */
-    xdescribe('/ buttons', () => {
+    describe('/ buttons', () => {
       it('should be able to render a div with id buttons', () => {
         const compiled = fixture.debugElement.query(By.css('div#buttons'));
         expect(compiled).not.toBe(null);
@@ -114,7 +114,6 @@ describe('PlayerComponent', () => {
 
       it('should be able to render a button with id btn-rock', () => {
         const compiled = fixture.debugElement.query(By.css('#btn-rock'));
-        // fixture.detectChanges();
         expect(compiled).not.toBe(null);
       });
 

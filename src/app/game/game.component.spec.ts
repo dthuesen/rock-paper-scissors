@@ -239,54 +239,50 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
 
     });
 
-    describe('/ Gamelogic - timing tests', () => {
+    /**
+     *  This test suite ist disabled!
+     *  I makes testing slow.
+     */
+    xdescribe('/ Gamelogic - timing tests', () => {
 
-        /**
-         *  This test suite ist disabled!
-         *  It has interferences with:
-         *  - PlayerComponent / Player - view / buttons
-         *
-         *  One of both must be disabled before test run.
-         */
-        xdescribe('/ Gamelogic timing tests - properties', () => {
-          let timeout;
+        describe('/ Gamelogic timing tests - properties', () => {
+          // let timeout;
 
-          it(`Before 0.8s the property 'computerText' should be empty`,  fakeAsync( () => {
-            // fixture.detectChanges();
+          it('Before 0.8s the property "computerText" should be empty',  () => {
+            fixture.detectChanges();
             const app = fixture.debugElement.componentInstance;
             app.countdown();
-            timeout = setTimeout( () => {
+            setTimeout( () => {
+            // timeout = setTimeout( () => {
               expect(app.computerText).toEqual('' || 'Computer wartet auf dich...');
             }, 795);
 
-            clearTimeout(timeout);
-          }));
+            // clearTimeout(timeout);
+          });
 
-          it(`Before 2.5s the property 'computerText' should NOT contain 'Stein'`,  async( () => {
-            // fixture.detectChanges();
+          it('Before 2.5s the property "computerText" should NOT contain "Stein"',  () => {
+            fixture.detectChanges();
             const app = fixture.debugElement.componentInstance;
-            console.log('app.computerText:' + '"' + app.computerText + '"');
             app.countdown();
-            timeout = setTimeout( () => {
+            // timeout = setTimeout( () => {
+            setTimeout( () => {
               expect(app.computerText).not.toContain('Stein');
-              console.log('app.computerText:' + '"' + app.computerText + '"');
             }, 2499);
 
-            clearTimeout(timeout);
-          }));
+            // clearTimeout(timeout);
+          });
 
-          it(`Before 3.5s the property 'computerText' should NOT contain 'Papier'`,  async( () => {
-            // fixture.detectChanges();
+          it('Before 3.5s the property "computerText" should NOT contain "Papier"',  () => {
+            fixture.detectChanges();
             const app = fixture.debugElement.componentInstance;
-            console.log('app.computerText:' + '"' + app.computerText + '"');
             app.countdown();
-            timeout = setTimeout( () => {
+            setTimeout( () => {
+            // timeout = setTimeout( () => {
               expect(app.computerText).not.toContain('Papier');
-              console.log('app.computerText:' + '"' + app.computerText + '"');
             }, 3499);
 
-            clearTimeout(timeout);
-          }));
+            // clearTimeout(timeout);
+          });
         });
 
         describe('/ Gamelogic timing tests - methods', () => {
