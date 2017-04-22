@@ -29,7 +29,7 @@ export class GameComponent {
 
   // (T) Setting friendly text to start the game
   displayStartHeadlines() {
-    this.computerText = 'Computer is waiting';
+    this.computerText = 'Computer wartet auf dich...';
     this.playerText   = 'Spiel deine Hand!';
   }
 
@@ -37,6 +37,7 @@ export class GameComponent {
   // Although this step is not necessary it makes the button
   // events more readable.
   setPlayersChoice(choice) {
+    this.winnerDisplayText = '';
     console.log('In GameComponent players choice: ', choice);
     this.computerText = 'Abzählen...';
     switch (choice) {
@@ -87,19 +88,26 @@ export class GameComponent {
 
   // (T) Simulates the countdown 'Schere, Stein, Papier'
   // and sets it as text to display later in game component
+ 
   countdown() {
-    setTimeout( () => {
-      this.computerText = 'Schere';
-    }, 800);
-    setTimeout( () => {
-      this.computerText = 'Stein';
-    }, 2500);
-    setTimeout( () => {
-      this.computerText = 'Papier';
-    }, 3500);
-    setTimeout( () => {
-      this.setComputersChoice();
-    }, 4500);
+    // let timeout;
+    // timeout = setTimeout( () => {
+    //   this.computerText = 'Schere';
+    // }, 800);
+    // // timeout();
+    // clearTimeout(timeout);
+
+    // timeout = setTimeout( () => {
+    //   this.computerText = 'Stein';
+    // }, 2500);
+
+    // timeout = setTimeout( () => {
+    //   this.computerText = 'Papier';
+    // }, 3500);
+
+    // timeout = setTimeout( () => {
+    //   this.setComputersChoice();
+    // }, 4500);
   }
 
   // (T) Simulates the computers choice
@@ -107,6 +115,8 @@ export class GameComponent {
     return Math.floor(Math.random() * 3) + 1;
   }
 
+  // (T) This method has two tasks:
+  // it sets the text who won and sets the score.
   calculateWinner(player: number, computer: number) {
     const value = player + computer;
     switch (value) {
@@ -143,15 +153,16 @@ export class GameComponent {
     console.log(`Score - Du: ${this.playersScore} : ${this.computersScore} Computer `);
   }
 
-  // displayWinner() {
-  //   setTimeout(function() {
-  //     // TODO
-  //   }, 2000);
-  // }
-
-  // Resets the counter and starts a new game
+  // (T) Resets the counter and starts a new game
   newGame() {
-    // TODO
+    this.playersScore      = 0;
+    this.computersScore    = 0;
+    this.winnerDisplayText = '';
+    this.playersChoice     = null;
+    this.computersChoice   = null;
+    this.playerText       = '';
+    this.computerText     = '';
+    this.startGame();
   }
 
 }

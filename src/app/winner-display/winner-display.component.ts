@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-winner-display',
@@ -9,6 +9,9 @@ export class WinnerDisplayComponent {
 
   @Input('winnerDisplayText') winnerDisplayText: string;
 
-  constructor() { }
+  constructor() {
+    this.winnerDisplayText = '';
+  }
+
 
 }

@@ -7,11 +7,13 @@ import { Component, Input } from '@angular/core';
 })
 export class ScoreComponent {
 
-  title: 'Spielstand: ';
+  scoreTitle: string;
   @Input('playersScore') playersScore: string;
   @Input('computersScore') computersScore: string;
 
-  constructor() { }
+  constructor() {
+    this.scoreTitle = 'Spielstand:';
+  }
 
 
 }

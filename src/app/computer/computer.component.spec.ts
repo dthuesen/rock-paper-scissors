@@ -1,3 +1,4 @@
+/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ComputerComponent } from './computer.component';
@@ -6,7 +7,7 @@ describe('ComputerComponent', () => {
   let component: ComputerComponent;
   let fixture: ComponentFixture<ComputerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach( async(() => {
     TestBed.configureTestingModule({
       declarations: [ ComputerComponent ]
     })
@@ -21,5 +22,13 @@ describe('ComputerComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('/ Properties', () => {
+
+    it(`should have an Input property 'computerDisplayText'`, () => {
+      const app = fixture.debugElement.componentInstance;
+      expect(app.computerDisplayText).toBeTruthy;
+    });
   });
 });

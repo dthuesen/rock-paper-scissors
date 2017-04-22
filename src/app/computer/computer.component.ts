@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ComputerComponent implements OnInit {
 
+  // (T)
   @Input('computerDisplayText') computerDisplayText: string;
 
   constructor() { }

@@ -2,21 +2,27 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
-This project uses Angular 4.0.0
+This project uses **Angular 4.0.0**
 
-**For running this app you can either...**
-+ **...use it with the current version of the CLI installed globally (for running it in dev-environment)**
-+ **...or start the build version from the 'dist' folder (standalone)**
+### Downloading and installing the app
+Change into the main directory of the app folder and **run `npm i`** for installing the required node modules and dependencies.
+
+For working on this app it is required to have the **current version of Angular-CLI installed globally!**
+
+
+### Starting server for the app
+Run `ng serve` in the main directory of the app folder. The Game then will be served on **`http://localhost:4200`** on an NG Live Development Server.
 
 ### Setting the base tag for a sub-folder on a webserver at build time:
 
+For running a build version on a server Angular is prepared for the main directory on the server. Running it on a subdirectory requires to set the base tag to the desired sub-folder in the index file by running the build command with the according option like so:
 
-Usage: `ng build --base-href <base>` 
+Usage: **`ng build --base-href <base>`**
 - or `ng build --base-href /myUrl/` 
 - or `ng build --bh /myUrl/` 
 - or `ng build --prod --bh /myUrl/`
 
-Example: `ng build --base-href home`
+Example: **`ng build --base-href home`**
 
 Replaces `<base href="/">` with <`base href="/home">` in index.html
  
@@ -24,6 +30,8 @@ Replaces `<base href="/">` with <`base href="/home">` in index.html
 
 
 ---
+
+# Some insights about my way to the current outcome
 
 ## Ideas for implementing the logic
 
