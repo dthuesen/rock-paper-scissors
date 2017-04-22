@@ -1,18 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-computer',
   templateUrl: './computer.component.html',
   styleUrls: ['./computer.component.css']
 })
-export class ComputerComponent implements OnInit {
+export class ComputerComponent {
 
   // (T)
   @Input('computerDisplayText') computerDisplayText: string;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

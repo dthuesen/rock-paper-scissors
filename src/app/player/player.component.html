@@ -1,7 +1,7 @@
 <h1>Player: </h1>
 <h2>{{playerDisplayText}}</h2>
 <div id="buttons">
-  <button id="btn-scissors" (click)="setPlayersChoice('scissors')">Schere</button>
-  <button id="btn-rock" (click)="setPlayersChoice('rock')">Stein</button>
-  <button id="btn-paper" (click)="setPlayersChoice('paper')">Papier</button>
+  <button id="btn-scissors" (click)="setPlayersChoice('scissors')" [disabled]="buttonsDisabled">Schere</button>
+  <button id="btn-rock" (click)="setPlayersChoice('rock')" [disabled]="buttonsDisabled">Stein</button>
+  <button id="btn-paper" (click)="setPlayersChoice('paper')" [disabled]="buttonsDisabled">Papier</button>
 </div>

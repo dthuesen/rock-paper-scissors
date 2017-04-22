@@ -8,10 +8,13 @@ import { Component, Output, Input, EventEmitter } from '@angular/core';
 export class PlayerComponent {
 
   // (T)
-  @Output() choiceSet = new EventEmitter();
+  @Output() choiceSet         = new EventEmitter();
   @Input('playerDisplayText') playerDisplayText: string;
 
-  title: String = '';
+  // (X)
+  @Input('buttonsDisabled') buttonsDisabled: boolean;
+
+  title: String  = '';
 
   constructor() {}
 

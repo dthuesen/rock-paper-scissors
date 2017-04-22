@@ -64,16 +64,18 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
         expect(compiled).not.toBe(null);
       });
 
-      it(`should render button 'Neustart'`, () => {
+      it('should render button "Neustart"', () => {
+        const compiled = fixture.debugElement.nativeElement;
+        expect(compiled.querySelector('button#new-game').textContent).toContain('Neustart');
+      });
+
+      it('should render button "Neustart"', () => {
         const compiled = fixture.debugElement.nativeElement;
         expect(compiled.querySelector('button#new-game').textContent).toContain('Neustart');
       });
     });
 
     describe('/ Gamelogic', () => {
-
-      beforeEach(function() {
-      });
 
       describe('/ Game - properties', () => {
 
@@ -106,6 +108,11 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
           expect(app.computersChoice).not.toBe(undefined);
         });
 
+        it('should have a property "winnerDisplayText"', () => {
+          const app = fixture.debugElement.componentInstance;
+          expect(app.winnerDisplayText).not.toBe(undefined);
+        });
+
         it(`should have a property 'playerText'`, () => {
           const app = fixture.debugElement.componentInstance;
           expect(app.playerText).toBeTruthy;
@@ -118,26 +125,27 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
           expect(app.computerText).not.toBe(undefined);
         });
 
-        it(`should have a property 'computerText'`, () => {
+        it('should have a property boolean "restartIsActive"', () => {
           const app = fixture.debugElement.componentInstance;
-          expect(app.computerText).not.toBe(undefined);
+          expect(app.restartIsActive).not.toBe(undefined);
+          expect(app.restartIsActive).toBe(false);
         });
 
       });
 
       describe('/ Game - methods', () => {
 
-        it(`should have a method 'startGame'`, () => {
+        it('should have a method "startGame()"', () => {
           const app = fixture.debugElement.componentInstance;
           expect(app.startGame).not.toBe(undefined);
         });
 
-        it(`should have a method 'displayStartHeadlines()'`, () => {
+        it('should have a method "displayStartHeadlines()", () => {
           const app = fixture.debugElement.componentInstance;
           expect(app.displayStartHeadlines).not.toBe(undefined);
         });
 
-        it(`displayStartHeadlines() should set the right start headlines`, () => {
+        it('displayStartHeadlines() should set the right start headlines', () => {
           fixture.detectChanges();
           const computerText = 'Computer wartet auf dich...';
           const playerText   = 'Spiel deine Hand!';
@@ -151,6 +159,12 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
           fixture.detectChanges();
           const app = fixture.debugElement.componentInstance;
           expect(app.setPlayersChoice).not.toBe(undefined);
+        });
+
+        it('"setPlayersChoice()" should set property "restartIsActive" to true', () => {
+          const app = fixture.debugElement.componentInstance;
+          app.setPlayersChoice('rock');
+          expect(app.restartIsActive).toBe(true);
         });
 
         it('should have a method "setComputersChoice()"', () => {

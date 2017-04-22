@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { PlayerComponent } from '../player/player.component';
 
 @Component({
@@ -17,6 +17,12 @@ export class GameComponent {
 
   playerText       = '';
   computerText     = '';
+
+  restartIsActive  = false;
+  buttonsDisabled  = false;
+
+  // @Input() buttonsDisabled = false;
+  // @Output() buttonsDisabled = new EventEmitter();
 
   constructor() {
     this.startGame();
@@ -37,6 +43,7 @@ export class GameComponent {
   // Although this step is not necessary it makes the button
   // events more readable.
   setPlayersChoice(choice) {
+    this.buttonsDisabled = true;
     this.winnerDisplayText = '';
     console.log('In GameComponent players choice: ', choice);
     this.computerText = 'Abzählen...';
@@ -57,6 +64,11 @@ export class GameComponent {
         this.countdown();
         break;
     }
+    this.restartIsActive = true;
+  }
+
+  setButtonsEnabled() {
+    this.buttonsDisabled  = true;
   }
 
   // (T) The computers choice (number) will be stored for
@@ -67,6 +79,8 @@ export class GameComponent {
     this.computersChoice = number;
     this.setComputersChoiceText(number);
     this.calculateWinner(this.playersChoice, this.computersChoice);
+    this.buttonsDisabled = false;
+    console.log('Game: ', this.buttonsDisabled);
   }
 
   // (T) translates the computers choice (number) into text
@@ -155,11 +169,13 @@ export class GameComponent {
   newGame() {
     this.playersScore      = 0;
     this.computersScore    = 0;
-    this.winnerDisplayText = '';
+    this.winnerDisplayText = 'Neues Spiel, neues Glück!';
     this.playersChoice     = null;
     this.computersChoice   = null;
-    this.playerText       = '';
-    this.computerText     = '';
+    this.playerText        = '';
+    this.computerText      = '';
+    this.restartIsActive   = false;
+    this.buttonsDisabled  = false;
     this.startGame();
   }
 
