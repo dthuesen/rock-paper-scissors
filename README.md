@@ -7,11 +7,11 @@ This project uses **Angular 4.0.0**
 ### Downloading and installing the app
 Change into the main directory of the app folder and **run `npm i`** for installing the required node modules and dependencies.
 
-For working on this app it is required to have the **current version of Angular-CLI installed globally!**
+For working on this app it is required to have the **current version of Angular-CLI (https://cli.angular.io/) installed globally!**
 
 
-### Starting server for the app
-Run `ng serve` in the main directory of the app folder. The Game then will be served on **`http://localhost:4200`** on an NG Live Development Server.
+### Starting the server for running the app
+Run **`ng serve`** in the main directory of the app folder. The Game then will be served on **`http://localhost:4200`** on an NG Live Development Server.
 
 ### Setting the base tag for a sub-folder on a webserver at build time:
 
@@ -26,7 +26,11 @@ Example: **`ng build --base-href home`**
 
 Replaces `<base href="/">` with <`base href="/home">` in index.html
  
+### Running the tests:
 
+The specs and suits are written for use of Jasmine (used in this app: v~2.5.2) and Karma (used in this app: v~1.6.0). It is good to know,that there are some issues with interferences between test so that not all suits can be enabled during a test run. It is a good idea to have these specific test disabled.
+
+To start the test run type: **`ng test`**
 
 
 ---
