@@ -9,6 +9,7 @@ export class WinnerDisplayComponent {
 
   @Input('winnerDisplayText') winnerDisplayText: string;
 
+  // (T)
   constructor() {
     this.winnerDisplayText = '';
   }
