@@ -172,10 +172,10 @@ export class GameComponent {
     this.winnerDisplayText = 'Neues Spiel, neues Glück!';
     this.playersChoice     = null;
     this.computersChoice   = null;
-    this.playerText        = '';
-    this.computerText      = '';
+    this.playerText        = 'Spiel deine Hand!';
+    this.computerText      = 'Computer wartet auf dich...';
     this.restartIsActive   = false;
-    this.buttonsDisabled  = false;
+    this.buttonsDisabled   = false;
     this.startGame();
   }
 

@@ -66,13 +66,12 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
 
       it('should render button "Neustart"', () => {
         const compiled = fixture.debugElement.nativeElement;
+        const app = fixture.debugElement.componentInstance;
+        app.restartIsActive = true;
+        fixture.detectChanges();
         expect(compiled.querySelector('button#new-game').textContent).toContain('Neustart');
       });
 
-      it('should render button "Neustart"', () => {
-        const compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('button#new-game').textContent).toContain('Neustart');
-      });
     });
 
     describe('/ Gamelogic', () => {
@@ -230,15 +229,17 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
         it('"newGame()" should reset all properties', () => {
           const playersScore      = 0;
           const computersScore    = 0;
-          const winnerDisplayText = '';
+          const winnerDisplayText = 'Neues Spiel, neues Glück!';
           const playersChoice     = null;
           const computersChoice   = null;
           const playerText       = 'Spiel deine Hand!';
           const computerText     = 'Computer wartet auf dich...';
+          this.restartIsActive   = false;
+          this.buttonsDisabled   = false;
           fixture.detectChanges();
           const app = fixture.debugElement.componentInstance;
           app.newGame();
-          console.log('app.computerText: ', app.computerText)
+          console.log('app.computerText: ', app.computerText);
           expect(app.playersScore === playersScore).toBe(true);
           expect(app.computersScore === computersScore).toBe(true);
           expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
