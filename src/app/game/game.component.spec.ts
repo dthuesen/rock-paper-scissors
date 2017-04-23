@@ -84,25 +84,25 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
           expect(app.title).toEqual('Schere, Stein, Papier');
         });
 
-        it(`should have a property 'playersScore'`, () => {
+        it('should have a property "playersScore"', () => {
           const app = fixture.debugElement.componentInstance;
           expect(app.playersScore).toBeTruthy;
           expect(app.playersScore).not.toBe(undefined);
         });
 
-        it(`should have a property 'computersScore'`, () => {
+        it('should have a property "computersScore"', () => {
           const app = fixture.debugElement.componentInstance;
           expect(app.computersScore).toBeTruthy;
           expect(app.computersScore).not.toBe(undefined);
         });
 
-        it(`should have a property 'playersChoice'`, () => {
+        it('should have a property "playersChoice"', () => {
           const app = fixture.debugElement.componentInstance;
           expect(app.playersChoice).toBeTruthy;
           expect(app.playersChoice).not.toBe(undefined);
         });
 
-        it(`should have a property 'computersChoice'`, () => {
+        it('should have a property "computersChoice"', () => {
           const app = fixture.debugElement.componentInstance;
           expect(app.computersChoice).toBeTruthy;
           expect(app.computersChoice).not.toBe(undefined);
@@ -113,13 +113,13 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
           expect(app.winnerDisplayText).not.toBe(undefined);
         });
 
-        it(`should have a property 'playerText'`, () => {
+        it('should have a property "playerText"', () => {
           const app = fixture.debugElement.componentInstance;
           expect(app.playerText).toBeTruthy;
           expect(app.playerText).not.toBe(undefined);
         });
 
-        it(`should have a property 'computerText'`, () => {
+        it('should have a property "computerText"', () => {
           const app = fixture.debugElement.componentInstance;
           expect(app.computerText).toBeTruthy;
           expect(app.computerText).not.toBe(undefined);
@@ -140,7 +140,7 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
           expect(app.startGame).not.toBe(undefined);
         });
 
-        it('should have a method "displayStartHeadlines()", () => {
+        it('should have a method "displayStartHeadlines()"', () => {
           const app = fixture.debugElement.componentInstance;
           expect(app.displayStartHeadlines).not.toBe(undefined);
         });
@@ -267,23 +267,17 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
             const app = fixture.debugElement.componentInstance;
             app.countdown();
             setTimeout( () => {
-            // timeout = setTimeout( () => {
               expect(app.computerText).toEqual('' || 'Computer wartet auf dich...');
             }, 795);
-
-            // clearTimeout(timeout);
           });
 
           it('Before 2.5s the property "computerText" should NOT contain "Stein"',  () => {
             fixture.detectChanges();
             const app = fixture.debugElement.componentInstance;
             app.countdown();
-            // timeout = setTimeout( () => {
             setTimeout( () => {
               expect(app.computerText).not.toContain('Stein');
             }, 2499);
-
-            // clearTimeout(timeout);
           });
 
           it('Before 3.5s the property "computerText" should NOT contain "Papier"',  () => {
@@ -291,11 +285,8 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
             const app = fixture.debugElement.componentInstance;
             app.countdown();
             setTimeout( () => {
-            // timeout = setTimeout( () => {
               expect(app.computerText).not.toContain('Papier');
             }, 3499);
-
-            // clearTimeout(timeout);
           });
         });
 
