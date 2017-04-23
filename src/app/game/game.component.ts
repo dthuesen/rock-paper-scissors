@@ -14,6 +14,13 @@ export class GameComponent {
   playersChoice:    number = null;
   computersChoice:  number = null;
   winnerDisplayText = '';
+  reason            = '';
+  reasons            = [
+    'Papier wickelt den Stein ein',
+    'Schere schneidet Papier',
+    'Stein macht die Schere stumpf',
+    'Ihr habt beide haben das Gleiche gezogen!'
+    ];
 
   playerText       = '';
   computerText     = '';
@@ -42,6 +49,7 @@ export class GameComponent {
   setPlayersChoice(choice) {
     this.buttonsDisabled = true;
     this.winnerDisplayText = '';
+    this.reason = '';
     console.log('In GameComponent players choice: ', choice);
     this.computerText = 'Abzählen...';
     switch (choice) {
@@ -73,6 +81,7 @@ export class GameComponent {
   // the translation (number into text)
   setComputersChoice() {
     const number = this.randomNumber();
+    console.log('randomNumber: ', number);
     this.computersChoice = number;
     this.setComputersChoiceText(number);
     this.calculateWinner(this.playersChoice, this.computersChoice);
@@ -128,36 +137,48 @@ export class GameComponent {
   // it sets the text who won and sets the score.
   calculateWinner(player: number, computer: number) {
     const value = player + computer;
+    console.log('player:', player);
+    console.log('computer:', computer);
+    console.log('value:', value);
+    if(player === computer) {
+      this.winnerDisplayText = 'Unentschieden!';
+      this.reason = this.reasons[3];
+      return;
+    }
     switch (value) {
-      case 3:
+       case 3:
         if (player > computer) {
-          this.winnerDisplayText = 'Papier wickelt den Stein ein. \n Du gewinnst!';
+          this.winnerDisplayText = 'Du gewinnst!';
+          this.reason = this.reasons[0];
           this.playersScore = this.playersScore + 1;
         } else {
-          this.winnerDisplayText = 'Papier wickelt den Stein ein. \n Computer gewinnt!';
+          this.winnerDisplayText = 'Computer gewinnt!';
+          this.reason = this.reasons[0];
           this.computersScore = this.computersScore + 1;
         }
         break;
       case 5:
         if (player > computer) {
-          this.winnerDisplayText = 'Schere schneidet Papier. \n Du gewinnst!';
+          this.winnerDisplayText = 'Du gewinnst!';
+          this.reason = this.reasons[1];
           this.playersScore = this.playersScore + 1;
         } else {
-          this.winnerDisplayText = 'Schere schneidet Papier. \n Computer gewinnt!';
+          this.winnerDisplayText = 'Computer gewinnt!';
+          this.reason = this.reasons[1];
           this.computersScore = this.computersScore + 1;
         }
         break;
       case 4:
         if (player < computer) {
-          this.winnerDisplayText = 'Stein macht die Schere stumpf. \n Du gewinnst!';
+          this.winnerDisplayText = 'Du gewinnst!';
+          this.reason = this.reasons[2];
           this.playersScore = this.playersScore + 1;
         } else {
-          this.winnerDisplayText = 'Stein macht die Schere stumpf. \n Computer gewinnt!';
+          this.winnerDisplayText = 'Computer gewinnt!';
+          this.reason = this.reasons[2];
           this.computersScore = this.computersScore + 1;
         }
         break;
-      default:
-        this.winnerDisplayText = 'Ihr habt beide das Gleiche gezogen. \n Unentschieden!';
     }
     console.log(`Score - Du: ${this.playersScore} : ${this.computersScore} Computer `);
   }

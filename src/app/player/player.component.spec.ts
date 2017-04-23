@@ -32,7 +32,7 @@ describe('PlayerComponent', () => {
    *  This test suite ist disabled!
    *  It has interferences with:
    *  - PlayerComponent / player - view
-   *  - PlayerComponent / Player - properties / buttons
+   *  - PlayerComponent / Player - view / buttons
    *
    *  This or the others must be disabled for testing!
    */
@@ -55,12 +55,12 @@ describe('PlayerComponent', () => {
 
     it('should have an output "buttonsDisabled"', () => {
       const app = fixture.debugElement.componentInstance;
-      app.playerDisplayText = 'test';
+      app.buttonsDisabled = true;
       expect(app.buttonsDisabled).not.toBe(undefined);
     });
   });
 
-  describe('/ Player - view', () => {
+  xdescribe('/ Player - view', () => {
 
     /**
      *  This test suite ist disabled!
@@ -69,7 +69,7 @@ describe('PlayerComponent', () => {
      *
      *  One of both must be disabled for testing
      */
-    xdescribe('/ h1 + h2 tags', () => {
+    describe('/ h1 + h2 tags', () => {
 
       it('should be able to render a h1 tag', async( () => {
         fixture.detectChanges();

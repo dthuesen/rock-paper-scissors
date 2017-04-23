@@ -112,6 +112,11 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
           expect(app.winnerDisplayText).not.toBe(undefined);
         });
 
+        it('should have a property "reason"', () => {
+          const app = fixture.debugElement.componentInstance;
+          expect(app.reason).not.toBe(undefined);
+        });
+
         it('should have a property "playerText"', () => {
           const app = fixture.debugElement.componentInstance;
           expect(app.playerText).toBeTruthy;
@@ -215,7 +220,7 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
         });
 
         it('"calculateWinner()" should do it right :-) ', () => {
-          const winnerDisplayText = 'Papier wickelt den Stein ein. \n Du gewinnst!';
+          const winnerDisplayText = 'Du gewinnst!';
           const app = fixture.debugElement.componentInstance;
           app.calculateWinner(2, 1);
           expect(app.winnerDisplayText === winnerDisplayText).toBe(true);

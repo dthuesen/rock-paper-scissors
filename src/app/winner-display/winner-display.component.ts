@@ -9,10 +9,12 @@ export class WinnerDisplayComponent {
 
   // (T) Input from GameComponent 'winnerDisplayText'
   @Input('winnerDisplayText') winnerDisplayText: string;
+  @Input('reason') reason: string;
 
   // (T)
   constructor() {
     this.winnerDisplayText = '';
+    this.reason = '';
   }
 
 

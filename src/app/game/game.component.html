@@ -2,7 +2,7 @@
 
 <app-player [playerDisplayText]="playerText" (choiceSet)="setPlayersChoice($event)" [buttonsDisabled]="buttonsDisabled" ></app-player>
 <app-computer [computerDisplayText]="computerText"></app-computer>
-<app-winner-display [winnerDisplayText]="winnerDisplayText"></app-winner-display>
+<app-winner-display [winnerDisplayText]="winnerDisplayText" [reason]="reason" ></app-winner-display>
 <app-score [playersScore]="playersScore" [computersScore]="computersScore" ></app-score>
 
 <div *ngIf="restartIsActive">
