@@ -1,28 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgModule } from '@angular/core';
+import { routingComponents, appRouting } from './app.routing';
 
 import { AppComponent } from './app.component';
-import { GameComponent } from './game/game.component';
-import { PlayerComponent } from './player/player.component';
 import { ComputerComponent } from './computer/computer.component';
-import { WinnerDisplayComponent } from './winner-display/winner-display.component';
+import { GameComponent } from './game/game.component';
+import { HomeComponent } from './home/home.component';
+import { PlayerComponent } from './player/player.component';
 import { ScoreComponent } from './score/score.component';
+import { WinnerDisplayComponent } from './winner-display/winner-display.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    GameComponent,
-    PlayerComponent,
     ComputerComponent,
+    GameComponent,
+    HomeComponent,
+    PlayerComponent,
+    routingComponents,
+    ScoreComponent,
     WinnerDisplayComponent,
-    ScoreComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    appRouting
   ],
   providers: [],
   bootstrap: [AppComponent]
