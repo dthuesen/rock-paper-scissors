@@ -38,6 +38,9 @@ To start the test run type: **`ng test`**
 
 The game app has a mor or less individual styling on top of Angular Material 2. But if you want you can also download an un-styled version from branch "without_styling". But I think it is not the 'story' because routing was implemented with styling. So the entrance page (home) will maybe not be available. But on that page you miss only a headline and a button. ;)
 
+Please keep in mind the app styling is only for showing how this game could look more like a game but is has no responsiveness.
+
+
 ## Routes
 
 A router is implemented to navigate from the entrance page to the game. It is only a simple routerLink navigation.
