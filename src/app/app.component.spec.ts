@@ -8,6 +8,12 @@ import { PlayerComponent } from './player/player.component';
 import { ScoreComponent } from './score/score.component';
 import { WinnerDisplayComponent } from './winner-display/winner-display.component';
 
+import {
+  MdButtonModule,
+  MdCardModule,
+  MdGridListModule
+  } from '@angular/material';
+
 xdescribe('AppComponent', () => {
   beforeEach( () => {
     TestBed.configureTestingModule({
@@ -17,7 +23,10 @@ xdescribe('AppComponent', () => {
         GameComponent,
         PlayerComponent,
         ScoreComponent,
-        WinnerDisplayComponent
+        WinnerDisplayComponent,
+        MdButtonModule,
+        MdCardModule,
+        MdGridListModule
       ],
     }).compileComponents();
   });

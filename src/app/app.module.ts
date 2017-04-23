@@ -12,6 +12,15 @@ import { PlayerComponent } from './player/player.component';
 import { ScoreComponent } from './score/score.component';
 import { WinnerDisplayComponent } from './winner-display/winner-display.component';
 
+// Add Angular Material
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MaterialModule,
+  MdButtonModule,
+  MdCardModule,
+  MdGridListModule
+  } from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -25,10 +34,14 @@ import { WinnerDisplayComponent } from './winner-display/winner-display.componen
     WinnerDisplayComponent,
   ],
   imports: [
+    appRouting,
+    BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     HttpModule,
-    appRouting
+    MaterialModule,
+    MdButtonModule,
+    MdGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

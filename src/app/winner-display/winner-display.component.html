@@ -1,4 +1,9 @@
-<h1>Winner Display: {{winnerDisplayText}}</h1>
-<div *ngIf="reason">
-  <h3>Reason: {{reason}}</h3>
+<div *ngIf="winnerDisplayText">
+  <md-card class="background-middle-dark height-110">
+    <h1 class="light-text ranchers-3-dark tile-no-shadow">{{winnerDisplayText}}</h1>
+    <span *ngIf="reason">
+      <h3 class="ranchers-1">{{reason}}</h3>
+    </span>
+  </md-card>
 </div>
+

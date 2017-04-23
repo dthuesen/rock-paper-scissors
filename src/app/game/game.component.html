@@ -1,11 +1,11 @@
-<h1>{{title}}</h1>
+<h1 class="bubblegum-sans-4 center-headline">{{title}}</h1>
 
 <app-player [playerDisplayText]="playerText" (choiceSet)="setPlayersChoice($event)" [buttonsDisabled]="buttonsDisabled" ></app-player>
-<app-computer [computerDisplayText]="computerText"></app-computer>
 <app-winner-display [winnerDisplayText]="winnerDisplayText" [reason]="reason" ></app-winner-display>
+<app-computer [computerDisplayText]="computerText"></app-computer>
 <app-score [playersScore]="playersScore" [computersScore]="computersScore" ></app-score>
 
 <div *ngIf="restartIsActive">
-  <button id="new-game" (click)="newGame()" >Neustart</button>
+  <button md-raised-button class="reset-button"  id="new-game" (click)="newGame()" >Neustart</button>
 </div>
 

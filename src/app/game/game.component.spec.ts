@@ -7,6 +7,7 @@ import { GameComponent } from './game.component';
 import { PlayerComponent } from '../player/player.component';
 import { ScoreComponent } from '../score/score.component';
 import { WinnerDisplayComponent } from '../winner-display/winner-display.component';
+import { MdCard } from '@angular/material';
 
 describe('Rock, Paper, Stone Game - GameComponent (container component)', () => {
 
@@ -17,7 +18,8 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
         GameComponent,
         PlayerComponent,
         ScoreComponent,
-        WinnerDisplayComponent
+        WinnerDisplayComponent,
+        MdCard
       ]
     })
     .compileComponents();

@@ -2,6 +2,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WinnerDisplayComponent } from './winner-display.component';
+import { MdCard } from '@angular/material';
 
 describe('WinnerDisplayComponent', () => {
   let component: WinnerDisplayComponent;
@@ -9,7 +10,10 @@ describe('WinnerDisplayComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ WinnerDisplayComponent ]
+      declarations: [
+        WinnerDisplayComponent,
+        MdCard
+        ]
     })
     .compileComponents();
   });

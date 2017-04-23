@@ -32,6 +32,14 @@ The specs and suits are written for use of Jasmine (used in this app: v~2.5.2) a
 
 To start the test run type: **`ng test`**
 
+**Some test suites or specs are disabled because of interferences between some tests.**
+
+## Styling
+
+The game app has a mor or less individual styling on top of Angular Material 2. But if you want you can also download an un-styled version from branch "without_styling".
+
+
+
 
 ---
 

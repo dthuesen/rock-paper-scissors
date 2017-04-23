@@ -1,4 +1,9 @@
 import { Component, Output, Input, EventEmitter } from '@angular/core';
+import {
+  MdButtonModule,
+  MdButtonToggle,
+  MdGridListModule
+  } from '@angular/material';
 
 @Component({
   selector: 'app-player',

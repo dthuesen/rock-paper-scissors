@@ -2,6 +2,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ComputerComponent } from './computer.component';
+import { MdCard } from '@angular/material';
 
 
 describe('ComputerComponent', () => {
@@ -10,7 +11,10 @@ describe('ComputerComponent', () => {
 
   beforeEach( async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComputerComponent ]
+      declarations: [
+        ComputerComponent,
+        MdCard
+         ]
     })
     .compileComponents();
   }));
