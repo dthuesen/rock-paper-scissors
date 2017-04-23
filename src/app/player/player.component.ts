@@ -7,19 +7,22 @@ import { Component, Output, Input, EventEmitter } from '@angular/core';
 })
 export class PlayerComponent {
 
-  // (T)
+  title: String  = '';
+
+  // (T) Players choice output to GameComponent 'setPlayersChoice'
   @Output() choiceSet         = new EventEmitter();
+
+  // (T) Input from GameComponent 'playerText'
   @Input('playerDisplayText') playerDisplayText: string;
 
-  // (X)
+  // (T) Input from GameComponent
   @Input('buttonsDisabled') buttonsDisabled: boolean;
 
-  title: String  = '';
 
   constructor() {}
 
   // (T) This emits the players choice up to
-  // the game component (container component)
+  // GameComponent (parent) property 'setPlayersChoice'
   setPlayersChoice(choice) {
     this.choiceSet.emit(choice);
   }

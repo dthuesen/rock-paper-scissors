@@ -7,6 +7,7 @@ import { Component, Input, OnInit} from '@angular/core';
 })
 export class WinnerDisplayComponent {
 
+  // (T) Input from GameComponent 'winnerDisplayText'
   @Input('winnerDisplayText') winnerDisplayText: string;
 
   // (T)

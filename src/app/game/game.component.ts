@@ -21,9 +21,6 @@ export class GameComponent {
   restartIsActive  = false;
   buttonsDisabled  = false;
 
-  // @Input() buttonsDisabled = false;
-  // @Output() buttonsDisabled = new EventEmitter();
-
   constructor() {
     this.startGame();
   }

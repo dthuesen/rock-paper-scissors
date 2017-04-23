@@ -36,7 +36,7 @@ describe('PlayerComponent', () => {
    *
    *  This or the others must be disabled for testing!
    */
-  xdescribe('/ Player - properties', () => {
+  describe('/ Player - properties', () => {
     it('should have a property "title"', () => {
       const app = fixture.debugElement.componentInstance;
       expect(app.title).not.toBe(undefined);
@@ -45,6 +45,18 @@ describe('PlayerComponent', () => {
     it('should have an output "choiceSet"', () => {
       const app = fixture.debugElement.componentInstance;
       expect(app.choiceSet).not.toBe(undefined);
+    });
+
+    it('should have an output "playerDisplayText"', () => {
+      const app = fixture.debugElement.componentInstance;
+      app.playerDisplayText = 'test';
+      expect(app.playerDisplayText).not.toBe(undefined);
+    });
+
+    it('should have an output "buttonsDisabled"', () => {
+      const app = fixture.debugElement.componentInstance;
+      app.playerDisplayText = 'test';
+      expect(app.buttonsDisabled).not.toBe(undefined);
     });
   });
 
@@ -136,6 +148,39 @@ describe('PlayerComponent', () => {
           expect(compiled).not.toBe(null);
         });
       }));
+
+      it('Button with id btn-rock should be disabled if set to disabled', () => {
+        const app = fixture.debugElement.componentInstance;
+        app.buttonsDisabled = true;
+        const compiled = fixture.debugElement.query(By.css('#btn-rock'));
+        fixture.detectChanges();
+        const disabled = compiled.properties.disabled;
+        console.log('button: ', disabled);
+        expect(disabled).toBe(true);
+        app.buttonsDisabled = false;
+      });
+
+      it('Button with id btn-paper should be disabled if set to disabled', () => {
+        const app = fixture.debugElement.componentInstance;
+        app.buttonsDisabled = true;
+        const compiled = fixture.debugElement.query(By.css('#btn-paper'));
+        fixture.detectChanges();
+        const disabled = compiled.properties.disabled;
+        console.log('button: ', disabled);
+        expect(disabled).toBe(true);
+        app.buttonsDisabled = false;
+      });
+
+      it('Button with id btn-scissors should be disabled if set to disabled', () => {
+        const app = fixture.debugElement.componentInstance;
+        app.buttonsDisabled = true;
+        const compiled = fixture.debugElement.query(By.css('#btn-scissors'));
+        fixture.detectChanges();
+        const disabled = compiled.properties.disabled;
+        console.log('button: ', disabled);
+        expect(disabled).toBe(true);
+        app.buttonsDisabled = false;
+      });
 
     });
 

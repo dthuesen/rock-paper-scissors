@@ -8,7 +8,9 @@ import { Component, Input } from '@angular/core';
 export class ScoreComponent {
 
   scoreTitle: string;
+  // (T) Input from GameComponent 'playersScore'
   @Input('playersScore') playersScore: string;
+  // (T) Input from GameComponent 'computersScore'
   @Input('computersScore') computersScore: string;
 
   constructor() {
