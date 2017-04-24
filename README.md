@@ -45,10 +45,16 @@ Please keep in mind the app styling is only for showing how this game could look
 
 A router is implemented to navigate from the entrance page to the game. It is only a simple routerLink navigation.
 
+## Updates:
+
+- Switched tos SASS
+- Cleaning-up styles and styling
+
+
 
 ---
 
-# Some insights about my 'way' to the current outcome
+# Some insights about ideas for implementation
 
 ## Ideas for implementing the logic
 
