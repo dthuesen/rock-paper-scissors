@@ -4,6 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This project uses **Angular 4.0.0**
 
+### See the game in action
+Click the link to see it on Github-Pages: [**https://dthuesen.github.io/rock-paper-scissors/home**](https://dthuesen.github.io/rock-paper-scissors/home)
+
+
 ### Downloading and installing the app
 Change into the main directory of the app folder and **run `npm i`** for installing the required node modules and dependencies.
 
