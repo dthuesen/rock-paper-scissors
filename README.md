@@ -54,6 +54,17 @@ A router is implemented to navigate from the entrance page to the game. It is on
 - Switched tos SASS
 - Cleaning-up styles and styling
 
+## Deploy to Github-Pages
+
+I installed a tool named **ng-deploy-gh-pages** since the Angular-CLI removed deploy to github-pages from the cli. 
+
+How to run it:
+  - (if not already installed: `npm install ng-deploy-gh-pages --save-dev`)
+  - Add script in package.json `"deploy": "./node_modules/.bin/deploy"`
+  - `npm run deploy`
+  
+Further information: [ng-deploy-gh-pages on Github](https://github.com/Smiranin/ng-deploy-gh-pages)
+
 
 
 ---
