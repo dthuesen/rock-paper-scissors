@@ -1,0 +1,270 @@
+/* =============================== *
+
+    TOC of this CSS File:
+    
+    1. Imports
+    2. Colours
+    3. Document
+    4. Text
+    5. Buttons
+    6. Elements
+
+ * =============================== * /
+   
+   
+
+
+/*****************************
+ *  1. Imports
+ *****************************/
+ 
+/* Add Angular 2 favorite theme to app */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+/* Import fontfaces used in the game */
+@import './assets/fonts/font-faces.css';
+
+
+/*****************************
+ *  2. Colours
+ *****************************/
+
+/* Main color references */
+$main-color:      #83579C;
+$main-color-lit:  #F4E8F8;
+$main-color-med:  #ba9bcc;
+$main-color-low:  #813B9A;
+$main-color-drk:  #4F1663;
+$frame-color:     #777;
+
+
+/*****************************
+ *  3. Document
+ *****************************/
+
+body {
+  background-image: url('./assets/images/pattern.svg');
+  background-color: $main-color;
+}
+
+.background-dark {
+  background: $main-color !important;
+}
+
+.background-middle-dark {
+  background: $main-color-med !important;
+}
+
+.container {
+  width: 600px !important;
+  margin-top: 20px !important;
+}
+
+
+/*****************************
+ *  4. Text
+ *****************************/
+
+.trade-winds-4 {
+  font-family: 'Trade Winds';
+  font-size: 5rem;
+  color: $main-color-lit;
+  text-shadow: 6px 6px $main-color-drk;
+}
+
+.merida-one-4 {
+  font-family: 'Merienda One';
+  font-size: 5rem;
+  color: $main-color-lit;
+  text-shadow: 6px 6px $main-color-drk;
+}
+
+.bubblegum-sans-4 {
+  font-family: 'Bubblegum Sans';
+  font-size: 5.3rem;
+  color: $main-color-lit;
+  text-shadow: 6px 6px $main-color-drk;
+}
+
+.ranchers-1 {
+  font-family: 'Bubblegum Sans';
+  font-size: 1.3rem;
+  color: $main-color-lit;
+  text-shadow: 1px 1px $main-color-drk;
+  line-height: .5rem;
+}
+
+.ranchers-2 {
+  font-family: 'Bubblegum Sans';
+  font-size: 2.3rem;
+  color: $main-color-lit;
+  text-shadow: 2px 2px $main-color-drk;
+  line-height: .5rem;
+}
+.ranchers-2-dark {
+  font-family: 'Bubblegum Sans';
+  font-size: 2.3rem;
+  color: $main-color-drk !important;
+  text-shadow: 2px 2px $main-color-low;
+}
+.ranchers-3-dark {
+  font-family: 'Bubblegum Sans';
+  font-size: 3.6rem;
+  color: $main-color-drk !important;
+  text-shadow: 2px 2px $main-color-low;
+}
+
+.light-text {
+  color: $main-color-lit;
+}
+
+.score-title {
+  position: relative;
+  font-family: 'Bubblegum Sans';
+  font-size: 01.7rem;
+  color: $main-color-drk;
+  line-height: .9rem;
+  left: -20px !important;
+}
+
+.score-text {
+  position: relative;
+  top: -50px;
+  left: 105px;
+  font-family: 'Bubblegum Sans';
+  font-size: 1.7rem;
+  color: $main-color-lit;
+  line-height: .9rem;
+  text-shadow:
+  -2px -2px 0 $main-color-low,
+    2px -2px 0 $main-color-low,
+    -2px 2px 0 $main-color-low,
+    2px 2px 0 $main-color-low; 
+}
+
+.textstroke {
+  color: $main-color-lit;
+  text-shadow:
+    -2px -2px 0 $main-color-drk,
+    2px -2px 0 $main-color-drk,
+    -2px 2px 0 $main-color-drk,
+    8px 8px 0 $main-color-drk;  
+}
+
+.center-headline {
+  text-align: center !important; 
+}
+
+
+/*****************************
+ *  5. Buttons
+ *****************************/
+
+.start-button {
+  font-family: 'Ranchers' !important;
+  font-size: 4.3rem !important;
+  color: $main-color-drk !important;
+  height: 5.6rem;
+  display: block !important;
+  margin: auto !important;
+}
+.reset-button {
+  font-family: 'Ranchers' !important;
+  position: relative;
+  top: -80px;
+  font-size: 3.3rem !important;
+  color: $main-color-drk !important;
+  background-color: $main-color-low;
+  height: 3.6rem;
+  display: block !important;
+  margin: auto !important;
+}
+
+.game-button {
+  font-family: 'Ranchers' !important;
+  font-size: 2.8rem !important;
+  background-color: $main-color-lit;
+  color: $main-color-drk !important;
+  height: 4.6rem;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  width: 160px;
+  box-shadow: 5px 5px $main-color-drk !important;
+}
+
+/*****************************
+ *  6. Elements
+ *****************************/
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tile {
+  border: 1px solid $frame-color;
+  margin: 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.tile-no-background {
+  border: none;
+  background: $main-color 0.1;
+  margin: 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile-no-shadow {
+  margin: 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-card {
+  min-width: 750px;
+  max-width: 900px;
+  margin: 10px auto;
+}
+.tile-no-background  {
+  margin: 10px auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none !important;
+  background-color: $main-color 0.1 !important;
+  background: none;
+  flex-wrap: wrap;
+  border: none;
+  box-shadow: none !important;
+}
+
+.height-40 {
+  min-height: 40px;
+}
+.height-60 {
+  min-height: 60px;
+}
+.height-80 {
+  min-height: 80px;
+}
+.height-90 {
+  min-height: 90px;
+}
+.height-100 {
+  min-height: 100px;
+}
+.height-110 {
+  min-height: 110px;
+}
+.height-130 {
+  min-height: 130px;
+}
+
+
