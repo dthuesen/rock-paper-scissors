@@ -7,15 +7,33 @@ This project uses **Angular 4.0.0**
 ### See the game in action
 Click the link to see it on Github-Pages: [**https://dthuesen.github.io/rock-paper-scissors/home**](https://dthuesen.github.io/rock-paper-scissors/home)
 
+### Purpose of this app
+
+It's a coding Kata to show my skills in certain topics (JS, Angular, TDD, ...).
+
+### The Game - a short description 
+Taken from Wikipdedia ([en.wikipedia.org/wiki/Rock–paper–scissors](https://en.wikipedia.org/wiki/Rock%E2%80%93paper%E2%80%93scissors))
+
+Rock–paper–scissors or Scissor-Paper-Rock, is a zero-sum hand game usually played between two people, in which each player simultaneously forms one of three shapes with an outstretched hand. These shapes are "rock" (✊ a simple fist), "paper" (✋ a flat hand), and "scissors" (✌️ a fist with the index and middle fingers together forming a V). The game has only two possible outcomes other than a tie: a player who decides to play rock will beat another player who has chosen scissors ("rock crushes scissors") but will lose to one who has played paper ("paper covers rock"); a play of paper will lose to a play of scissors ("scissors cut paper"). If both players choose the same shape, the game is tied and is usually immediately replayed to break the tie.
+
+### Non-functional requirements
+1. For opening and checking the functionality the project shouldn't have to be deployed to an external server.
+2. The should be able to build via a standard tooling like Webpack, Grunt, Gulp, NPM, (...).
+3. Starting the should possible instantly with a command like npm start (in the case of this app run the command `ng serve -o`).
+4. The game works well.
+5. Minimal UI (no CSS required, only HTML)
+
+### Functional requirements
+1. Implementation: ES5, ES 2016/2016 or TypeScript and if applicable a framework like AngularJS, Angular, Meteor (else?) or Library like React
+2. The user has to do an input for plying the game
 
 ### Downloading and installing the app
-Change into the main directory of the app folder and **run `npm i`** for installing the required node modules and dependencies.
-
-For working on this app it is required to have the **current version of Angular-CLI (https://cli.angular.io/) installed globally!**
-
+1. Change into the main directory of the app folder and **run `npm i`** for installing the required node modules and dependencies.
+2. For working on this app it is required to have the **current version of Angular-CLI (https://cli.angular.io/) installed globally!**
 
 ### Starting the server for running the app
-Run **`ng serve`** in the main directory of the app folder. The Game then will be served on **`http://localhost:4200`** on an NG Live Development Server.
+1. Run **`ng serve -o`** in the main directory of the app folder (because of the flag '-o' it'll open instantly in a browser window). 
+2. The Game then will be served on **`http://localhost:4200`** on an NG Live Development Server.
 
 ### Setting the base tag for a sub-folder on a webserver at build time:
 
@@ -51,8 +69,9 @@ A router is implemented to navigate from the entrance page to the game. It is on
 
 ## Updates:
 
-- Switched tos SASS
+- Switched to SASS
 - Cleaning-up styles and styling
+- Added TypeDoc for code documentation (http://typedoc.org/) -  note: this tool is also helpfull to check the code for missing typings (in this app there are many void and any - have to change that time by time)
 
 ## Deploy to Github-Pages
 
