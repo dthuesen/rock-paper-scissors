@@ -307,10 +307,52 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
             expect(app.calculateWinner).not.toBe(undefined);
           });
 
-          it('"calculateWinner()" should do it right :-) ', () => {
+          it('"calculateWinner()" should set property winnerDisplayText to "Unentschieden!" if game is tied', () => {
+            const winnerDisplayText = 'Unentschieden!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(2, 2);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
+          it('"calculateWinner()" with drawn hands 3:2 should set property winnerDisplayText to "Du gewinnst"', () => {
             const winnerDisplayText = 'Du gewinnst!';
             const app = fixture.debugElement.componentInstance;
             app.calculateWinner(2, 1);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
+          it('"calculateWinner()" with drawn hands 3:2 should set property winnerDisplayText to "Du gewinnst"', () => {
+            const winnerDisplayText = 'Du gewinnst!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(3, 2);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
+          it('"calculateWinner()" with drawn hands 1:3 should set property winnerDisplayText to "Du gewinnst"', () => {
+            const winnerDisplayText = 'Du gewinnst!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(1, 3);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
+          it('"calculateWinner()" with drawn hands 3:2 should set property winnerDisplayText to "Computer gewinnt!"', () => {
+            const winnerDisplayText = 'Computer gewinnt!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(1, 2);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
+          it('"calculateWinner()" with drawn hands 3:2 should set property winnerDisplayText to "Computer gewinnt!"', () => {
+            const winnerDisplayText = 'Computer gewinnt!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(2, 3);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
+          it('"calculateWinner()" with drawn hands 1:3 should set property winnerDisplayText to "Computer gewinnt!"', () => {
+            const winnerDisplayText = 'Computer gewinnt!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(3, 1);
             expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
           });
 
@@ -324,7 +366,7 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
      *  This test suite ist disabled!
      *  I makes testing slow.
      */
-    xdescribe('/ Gamelogic - timing tests', () => {
+    describe('/ Gamelogic - timing tests', () => {
 
         describe('/ Gamelogic timing tests - properties', () => {
           let app;

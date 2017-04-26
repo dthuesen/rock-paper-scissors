@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 import { async, tick, fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement} from '@angular/core';
+import { DebugElement, EventEmitter} from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { PlayerComponent } from './player.component';
@@ -38,7 +38,7 @@ describe('PlayerComponent', () => {
    *
    *  This or the others must be disabled for testing!
    */
-  xdescribe('/ Player - properties', () => {
+  describe('/ Player - properties', () => {
     it('should have a property "title"', () => {
       const app = fixture.debugElement.componentInstance;
       expect(app.title).not.toBe(undefined);
@@ -67,7 +67,7 @@ describe('PlayerComponent', () => {
    *  have interferences with other tests suites.
    *  For further details see test suits inside.
    */
-  xdescribe('/ Player - view', () => {
+  describe('/ Player - view', () => {
 
     /**
      *  This test suite ist disabled!
@@ -206,11 +206,25 @@ describe('PlayerComponent', () => {
   });
 
   describe('/ Player - methods', () => {
+    let app;
+
+    beforeEach( () => {
+      app = fixture.debugElement.componentInstance;
+    });
 
     it('should have method "setPlayersChoice()"', () => {
-      const app = fixture.debugElement.componentInstance;
+      // app = fixture.debugElement.componentInstance;
       expect(app.setPlayersChoice).toBeDefined();
     });
+
+    // TODO: Is not yet ready 
+    // fit('setPlayersChoice() should have called choiceSet.emit(choice)', () => {
+    //   // app = fixture.debugElement.componentInstance;
+    //   const spy = spyOn(component, 'choiceSet.emit()');
+    //   const choice = 'paper';
+    //   app.setPlayersChoice(choice);
+    //   expect(spy).toHaveBeenCalled();
+    // });
 
   });
 });
