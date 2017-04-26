@@ -38,7 +38,7 @@ describe('PlayerComponent', () => {
    *
    *  This or the others must be disabled for testing!
    */
-  describe('/ Player - properties', () => {
+  xdescribe('/ Player - properties', () => {
     it('should have a property "title"', () => {
       const app = fixture.debugElement.componentInstance;
       expect(app.title).not.toBe(undefined);
@@ -67,7 +67,7 @@ describe('PlayerComponent', () => {
    *  have interferences with other tests suites.
    *  For further details see test suits inside.
    */
-  describe('/ Player - view', () => {
+  xdescribe('/ Player - view', () => {
 
     /**
      *  This test suite ist disabled!
