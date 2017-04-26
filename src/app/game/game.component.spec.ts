@@ -168,6 +168,12 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
             expect(app.newGame).not.toBe(undefined);
           });
 
+          it('should have a method "countdown()"', () => {
+            fixture.detectChanges();
+            const app = fixture.debugElement.componentInstance;
+            expect(app.countdown).not.toBe(undefined);
+          });
+
           it('"newGame()" should reset all properties', () => {
             const playersScore      = 0;
             const computersScore    = 0;
@@ -289,11 +295,7 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
 
         describe('/ 4. Game - methods for calculating the winner', () => {
 
-          it('should have a method "countdown()"', () => {
-            fixture.detectChanges();
-            const app = fixture.debugElement.componentInstance;
-            expect(app.countdown).not.toBe(undefined);
-          });
+
 
           it('should have a method "randomNumber()"', () => {
             const app = fixture.debugElement.componentInstance;
@@ -325,63 +327,76 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
     xdescribe('/ Gamelogic - timing tests', () => {
 
         describe('/ Gamelogic timing tests - properties', () => {
-          // let timeout;
+          let app;
+
+          beforeEach( () => {
+            app = fixture.debugElement.componentInstance;
+            jasmine.clock().install();
+          });
+
+          afterEach( () => {
+            jasmine.clock().uninstall();
+          });
 
           it('Before 0.8s the property "computerText" should be empty',  () => {
-            fixture.detectChanges();
-            const app = fixture.debugElement.componentInstance;
             app.countdown();
-            setTimeout( () => {
-              expect(app.computerText).toEqual('' || 'Computer wartet auf dich...');
-            }, 795);
+            jasmine.clock().tick(795);
+            expect(app.computerText).toEqual('' || 'Computer wartet auf dich...');
+            jasmine.clock().uninstall();
           });
 
           it('Before 2.5s the property "computerText" should NOT contain "Stein"',  () => {
-            fixture.detectChanges();
-            const app = fixture.debugElement.componentInstance;
             app.countdown();
-            setTimeout( () => {
-              expect(app.computerText).not.toContain('Stein');
-            }, 2499);
+            jasmine.clock().tick(2499);
+            expect(app.computerText).not.toContain('Stein');
+            jasmine.clock().uninstall();
           });
 
           it('Before 3.5s the property "computerText" should NOT contain "Papier"',  () => {
-            fixture.detectChanges();
-            const app = fixture.debugElement.componentInstance;
             app.countdown();
-            setTimeout( () => {
-              expect(app.computerText).not.toContain('Papier');
-            }, 3499);
+            jasmine.clock().tick(3499);
+            expect(app.computerText).not.toContain('Papier');
+            jasmine.clock().uninstall();
           });
         });
 
         describe('/ Gamelogic timing tests - methods', () => {
+          let app;
+
+          beforeEach( () => {
+            app = fixture.debugElement.componentInstance;
+            jasmine.clock().install();
+          });
+
+          afterEach( () => {
+            jasmine.clock().uninstall();
+          });
 
           it('After 0.8s the method countdown() should set property "computerText" to "Schere"',  () => {
-            fixture.detectChanges();
-            const app = fixture.debugElement.componentInstance;
             app.countdown();
-            setTimeout( () => {
-              expect(app.computerText).toContain('Schere');
-            }, 800);
+            jasmine.clock().tick(800);
+            expect(app.computerText).toContain('Schere');
+            jasmine.clock().uninstall();
           });
 
           it('After 2.5s the method countdown() should set property "computerText" to "Stein"',  () => {
-            fixture.detectChanges();
-            const app = fixture.debugElement.componentInstance;
             app.countdown();
-            setTimeout( () => {
-              expect(app.computerText).toContain('Stein');
-            }, 2500);
+            jasmine.clock().tick(2500);
+            expect(app.computerText).toContain('Stein');
           });
 
           it('After 3.5s the method countdown() should set property "computerText" to "Papier"',  () => {
-            fixture.detectChanges();
-            const app = fixture.debugElement.componentInstance;
             app.countdown();
-            setTimeout( () => {
-              expect(app.computerText).toContain('Papier');
-            }, 3500);
+            jasmine.clock().tick(3500);
+            expect(app.computerText).toContain('Papier');
+          });
+
+          it('countdown() should have called "setComputersChoice()" after 4.5 sec.', () => {
+            const spy = spyOn(component, 'setComputersChoice');
+            app.countdown();
+            expect(spy).not.toHaveBeenCalled();
+            jasmine.clock().tick(4500);
+            expect(spy).toHaveBeenCalled();
           });
 
         });
