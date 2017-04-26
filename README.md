@@ -25,7 +25,7 @@ Rock–paper–scissors or Scissor-Paper-Rock, is a zero-sum hand game usually p
 
 ### Functional requirements
 1. Implementation: ES5, ES 2016/2016 or TypeScript and if applicable a framework like AngularJS, Angular, Meteor (else?) or Library like React
-2. The user has to do an input for plying the game
+2. The user has to do an input for playing the game
 
 ### Downloading and installing the app
 1. Change into the main directory of the app folder and **run `npm i`** for installing the required node modules and dependencies.
