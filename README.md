@@ -97,21 +97,22 @@ Further information: [ng-deploy-gh-pages on Github](https://github.com/Smiranin/
 The idea is, that all game pieces are following in a line. the first will be beaten by the second, the second by the third, the third by the first. In other words like this:
 
     ROCK by PAPER by SCISSORS by ROCK
-    
+
 or
-    
+
     0 by 1 by 2 by 3 by 0   =   [0, 1, 2, 3, 0]
-    
+
 With this the implementation of deciding the winner it might be do it with two if's:
 
     order = [0, 1, 2, 0]
-      if (order[player] === order[computer]) {
-        // TIE!
-      } else if (order[player] === order[computer + 1]) {
-        // PLAYER WON!;
-      } else {
-        // COMPUTER WON!
-      };
+
+    if (order[player] === order[computer]) {
+      // TIE!
+    } else if (order[player] === order[computer + 1]) {
+      // PLAYER WON!;
+    } else {
+      // COMPUTER WON!
+    };
 
 If the list gets longer:  `MATCH by ROCK by PAPER by SCISSORS by FOUNTAIN by MATCH` is will work as well.
 But then there is a second lane to be considered too: `MATCH by SCISSORS by FOUNTAIN` and in that case it would lead to a third if statement:
