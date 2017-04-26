@@ -40,7 +40,7 @@ Rock–paper–scissors or Scissor-Paper-Rock, is a zero-sum hand game usually p
 For running a build version on a server Angular is prepared for the main directory on the server. Running it on a subdirectory requires to set the base tag to the desired sub-folder in the index file by running the build command with the according option like so:
 
 Usage: **`ng build --base-href <base>`**
-- or `ng build --base-href /myUrl/` 
+- or `ng build --base-href /myUrl/`
 - or `ng build --bh /myUrl/` 
 - or `ng build --prod --bh /myUrl/`
 
@@ -104,7 +104,7 @@ or
 
 With this the implementation of deciding the winner it might be do it with two if's:
 
-    order = [0, 1, 2, 0]
+    let order = [0, 1, 2, 0]
 
     if (order[player] === order[computer]) {
       // TIE!
@@ -123,8 +123,8 @@ But then there is a second lane to be considered too: `MATCH by SCISSORS by FOUN
     3 = SCISSORS
     4 = FOUNTAIN
 
-    order = [0, 1, 2, 3, 4, 0]
-    
+    let order = [0, 1, 2, 3, 4, 0]
+
     if (order[player] === order[computer]) {
       // TIE!
     } else if (order[player] === order[computer + 1]) {
@@ -140,7 +140,7 @@ But here is a little problem, if the computer choses MATCH and the player choose
 
 This is how the implementation of the logic to find the winner could look like:
 
-    order = [0, 1, 2, 3, 4, 0];
+    let order = [0, 1, 2, 3, 4, 0];
 
     constructor() {
       this.choose(0, 2);
