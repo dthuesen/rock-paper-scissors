@@ -56,6 +56,10 @@ To start the test run type: **`ng test`**
 
 **Some test suites or specs are disabled because of interferences between some tests.**
 
+### Generate a test coverage report
+
+Run the command `ng test --code-coverage --reporters=coverage-istanbul`. It takes a while but than a good overview for test coverage is generated in a folder called 'coverage'. With this coverage documentation it is easy to figure out which parts of the app are not covered by unit tests.
+
 ## Styling
 
 The game app has a more or less individual styling on top of Angular Material 2. But if you want you can also download an un-styled version from branch "without_styling". But I think it is not the 'story' because routing was implemented with styling. So the entrance page (home) will maybe not be available. But on that page you miss only a headline and a button. ;)

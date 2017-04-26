@@ -141,121 +141,178 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
 
       describe('/ Game - methods', () => {
 
-        it('should have a method "startGame()"', () => {
-          const app = fixture.debugElement.componentInstance;
-          expect(app.startGame).not.toBe(undefined);
+        describe('/ 1. Game - methods general', () => {
+
+          it('should have a method "startGame()"', () => {
+            const app = fixture.debugElement.componentInstance;
+            expect(app.startGame).not.toBe(undefined);
+          });
+
+          it('should have a method "displayStartHeadlines()"', () => {
+            const app = fixture.debugElement.componentInstance;
+            expect(app.displayStartHeadlines).not.toBe(undefined);
+          });
+
+          it('displayStartHeadlines() should set the right start headlines', () => {
+            fixture.detectChanges();
+            const computerText = 'Computer wartet auf dich...';
+            const playerText   = 'Spiel deine Hand!';
+            const app = fixture.debugElement.componentInstance;
+            app.displayStartHeadlines();
+            expect(app.computerText === computerText).toBe(true);
+            expect(app.playerText === playerText).toBe(true);
+          });
+
+          it('should have a method "newGame()"', () => {
+            const app = fixture.debugElement.componentInstance;
+            expect(app.newGame).not.toBe(undefined);
+          });
+
+          it('"newGame()" should reset all properties', () => {
+            const playersScore      = 0;
+            const computersScore    = 0;
+            const winnerDisplayText = 'Neues Spiel, neues Glück!';
+            const playersChoice     = null;
+            const computersChoice   = null;
+            const playerText       = 'Spiel deine Hand!';
+            const computerText     = 'Computer wartet auf dich...';
+            this.restartIsActive   = false;
+            this.buttonsDisabled   = false;
+            fixture.detectChanges();
+            const app = fixture.debugElement.componentInstance;
+            app.newGame();
+            console.log('app.computerText: ', app.computerText);
+            expect(app.playersScore === playersScore).toBe(true);
+            expect(app.computersScore === computersScore).toBe(true);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+            expect(app.playersChoice).toBe(null);
+            expect(app.computersChoice).toBe(null);
+            expect(app.playerText === playerText).toBe(true);
+            expect(app.computerText === computerText).toBe(true);
+          });
+
         });
 
-        it('should have a method "displayStartHeadlines()"', () => {
-          const app = fixture.debugElement.componentInstance;
-          expect(app.displayStartHeadlines).not.toBe(undefined);
+        describe('/ 2. Game - methods for player', () => {
+
+          it('should have a method "setPlayersChoice()"', () => {
+            fixture.detectChanges();
+            const app = fixture.debugElement.componentInstance;
+            expect(app.setPlayersChoice).not.toBe(undefined);
+          });
+
+          it('"setPlayersChoice(rock)" should set property "restartIsActive" to true', () => {
+            const app = fixture.debugElement.componentInstance;
+            app.setPlayersChoice('rock');
+            expect(app.restartIsActive).toBe(true);
+          });
+          it('"setPlayersChoice(paper)" should set property "restartIsActive" to true', () => {
+            const app = fixture.debugElement.componentInstance;
+            app.setPlayersChoice('paper');
+            expect(app.restartIsActive).toBe(true);
+          });
+          it('"setPlayersChoice(scissors)" should set property "restartIsActive" to true', () => {
+            const app = fixture.debugElement.componentInstance;
+            app.setPlayersChoice('scissors');
+            expect(app.restartIsActive).toBe(true);
+          });
+
         });
 
-        it('displayStartHeadlines() should set the right start headlines', () => {
-          fixture.detectChanges();
-          const computerText = 'Computer wartet auf dich...';
-          const playerText   = 'Spiel deine Hand!';
-          const app = fixture.debugElement.componentInstance;
-          app.displayStartHeadlines();
-          expect(app.computerText === computerText).toBe(true);
-          expect(app.playerText === playerText).toBe(true);
+        describe('/ 3. Game - methods for computer', () => {
+
+          it('should have a method "setComputersChoice()"', () => {
+            fixture.detectChanges();
+            const app = fixture.debugElement.componentInstance;
+            expect(app.setComputersChoice).not.toBe(undefined);
+          });
+
+          it('"setComputersChoice()" it\'s variable should get a random number', () => {
+            const app = fixture.debugElement.componentInstance;
+            app.setComputersChoice();
+            fixture.detectChanges();
+            expect(app.computersChoice).toBeGreaterThan(0);
+            expect(app.computersChoice).toBeLessThan(4);
+          });
+
+          it('"setComputersChoice()" should have called setComputersChoiceText()', () => {
+            const app = fixture.debugElement.componentInstance;
+            const spy = spyOn(component, 'setComputersChoiceText');
+            app.setComputersChoice();
+            fixture.detectChanges();
+            expect(spy).toHaveBeenCalled();
+          });
+
+          it('"setComputersChoice()" should have called calculateWinner()', () => {
+            const app = fixture.debugElement.componentInstance;
+            const spy = spyOn(component, 'calculateWinner');
+            app.setComputersChoice();
+            fixture.detectChanges();
+            expect(spy).toHaveBeenCalled();
+          });
+
+          it('"setComputersChoice()" should have set property buttonsDisabled to false', () => {
+            const app = fixture.debugElement.componentInstance;
+            const buttonsDisabled = app.buttonsDisabled;
+            app.setComputersChoice();
+            fixture.detectChanges();
+            expect(buttonsDisabled).toBe(false);
+          });
+
+          it('should have a method "setComputersChoiceText()"', () => {
+            const app = fixture.debugElement.componentInstance;
+            expect(app.setComputersChoiceText).not.toBe(undefined);
+          });
+
+          it('setComputersChoiceText(1) should translate "Computer spielt Stein"', () => {
+            const computerText = 'Computer spielt Stein';
+            const app = fixture.debugElement.componentInstance;
+            app.setComputersChoiceText(1);
+            expect(app.computerText === computerText).toBe(true);
+          });
+
+          it('setComputersChoiceText(2) should translate "Computer spielt Papier"', () => {
+            const computerText = 'Computer spielt Papier';
+            const app = fixture.debugElement.componentInstance;
+            app.setComputersChoiceText(2);
+            expect(app.computerText === computerText).toBe(true);
+          });
+
+          it('setComputersChoiceText(3) should translate "Computer spielt Schere"', () => {
+            const computerText = 'Computer spielt Schere';
+            const app = fixture.debugElement.componentInstance;
+            app.setComputersChoiceText(3);
+            expect(app.computerText === computerText).toBe(true);
+          });
+
         });
 
-        it('should have a method "setPlayersChoice()"', () => {
-          fixture.detectChanges();
-          const app = fixture.debugElement.componentInstance;
-          expect(app.setPlayersChoice).not.toBe(undefined);
-        });
+        describe('/ 4. Game - methods for calculating the winner', () => {
 
-        it('"setPlayersChoice()" should set property "restartIsActive" to true', () => {
-          const app = fixture.debugElement.componentInstance;
-          app.setPlayersChoice('rock');
-          expect(app.restartIsActive).toBe(true);
-        });
+          it('should have a method "countdown()"', () => {
+            fixture.detectChanges();
+            const app = fixture.debugElement.componentInstance;
+            expect(app.countdown).not.toBe(undefined);
+          });
 
-        it('should have a method "setComputersChoice()"', () => {
-          fixture.detectChanges();
-          const app = fixture.debugElement.componentInstance;
-          expect(app.setComputersChoice).not.toBe(undefined);
-        });
+          it('should have a method "randomNumber()"', () => {
+            const app = fixture.debugElement.componentInstance;
+            expect(app.randomNumber).not.toBe(undefined);
+          });
 
-        it('should have a method "setComputersChoiceText()"', () => {
-          const app = fixture.debugElement.componentInstance;
-          expect(app.setComputersChoiceText).not.toBe(undefined);
-        });
+          it('should have a method "calculateWinner()"', () => {
+            const app = fixture.debugElement.componentInstance;
+            expect(app.calculateWinner).not.toBe(undefined);
+          });
 
-        it('setComputersChoiceText(1) should translate "Computer spielt Stein"', () => {
-          const computerText = 'Computer spielt Stein';
-          const app = fixture.debugElement.componentInstance;
-          app.setComputersChoiceText(1);
-          expect(app.computerText === computerText).toBe(true);
-        });
+          it('"calculateWinner()" should do it right :-) ', () => {
+            const winnerDisplayText = 'Du gewinnst!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(2, 1);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
 
-        it('setComputersChoiceText(2) should translate "Computer spielt Papier"', () => {
-          const computerText = 'Computer spielt Papier';
-          const app = fixture.debugElement.componentInstance;
-          app.setComputersChoiceText(2);
-          expect(app.computerText === computerText).toBe(true);
         });
-
-        it('setComputersChoiceText(3) should translate "Computer spielt Schere"', () => {
-          const computerText = 'Computer spielt Schere';
-          const app = fixture.debugElement.componentInstance;
-          app.setComputersChoiceText(3);
-          expect(app.computerText === computerText).toBe(true);
-        });
-
-        it('should have a method "countdown()"', () => {
-          fixture.detectChanges();
-          const app = fixture.debugElement.componentInstance;
-          expect(app.countdown).not.toBe(undefined);
-        });
-
-        it('should have a method "randomNumber()"', () => {
-          const app = fixture.debugElement.componentInstance;
-          expect(app.randomNumber).not.toBe(undefined);
-        });
-
-        it('should have a method "calculateWinner()"', () => {
-          const app = fixture.debugElement.componentInstance;
-          expect(app.calculateWinner).not.toBe(undefined);
-        });
-
-        it('"calculateWinner()" should do it right :-) ', () => {
-          const winnerDisplayText = 'Du gewinnst!';
-          const app = fixture.debugElement.componentInstance;
-          app.calculateWinner(2, 1);
-          expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
-        });
-
-        it('should have a method "newGame()"', () => {
-          const app = fixture.debugElement.componentInstance;
-          expect(app.newGame).not.toBe(undefined);
-        });
-
-        it('"newGame()" should reset all properties', () => {
-          const playersScore      = 0;
-          const computersScore    = 0;
-          const winnerDisplayText = 'Neues Spiel, neues Glück!';
-          const playersChoice     = null;
-          const computersChoice   = null;
-          const playerText       = 'Spiel deine Hand!';
-          const computerText     = 'Computer wartet auf dich...';
-          this.restartIsActive   = false;
-          this.buttonsDisabled   = false;
-          fixture.detectChanges();
-          const app = fixture.debugElement.componentInstance;
-          app.newGame();
-          console.log('app.computerText: ', app.computerText);
-          expect(app.playersScore === playersScore).toBe(true);
-          expect(app.computersScore === computersScore).toBe(true);
-          expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
-          expect(app.playersChoice).toBe(null);
-          expect(app.computersChoice).toBe(null);
-          expect(app.playerText === playerText).toBe(true);
-          expect(app.computerText === computerText).toBe(true);
-        });
-
 
       });
 

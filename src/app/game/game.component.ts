@@ -72,21 +72,15 @@ export class GameComponent {
     this.restartIsActive = true;
   }
 
-  setButtonsEnabled() {
-    this.buttonsDisabled  = true;
-  }
-
   // (T) The computers choice (number) will be stored for
   // determining the winner later and calls at last
   // the translation (number into text)
   setComputersChoice() {
     const number = this.randomNumber();
-    console.log('randomNumber: ', number);
     this.computersChoice = number;
     this.setComputersChoiceText(number);
     this.calculateWinner(this.playersChoice, this.computersChoice);
     this.buttonsDisabled = false;
-    console.log('Game: ', this.buttonsDisabled);
   }
 
   // (T) translates the computers choice (number) into text
@@ -140,7 +134,7 @@ export class GameComponent {
     console.log('player:', player);
     console.log('computer:', computer);
     console.log('value:', value);
-    if(player === computer) {
+    if (player === computer) {
       this.winnerDisplayText = 'Unentschieden!';
       this.reason = this.reasons[3];
       return;
