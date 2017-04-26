@@ -123,16 +123,17 @@ But then there is a second lane to be considered too: `MATCH by SCISSORS by FOUN
     4 = FOUNTAIN
 
     order = [0, 1, 2, 3, 4, 0]
-      if (order[player] === order[computer]) {
-        // TIE!
-      } else if (order[player] === order[computer + 1]) {
-        // PLAYER WON!
-      } else if (order[player] === order[computer + 2]) {
-        // PLAYER WON!
-      } else {
-      /**  because the player also wins with the difference of 2 (before addition of 1)  **/
-        // COMPUTER WON!
-      };
+    
+    if (order[player] === order[computer]) {
+      // TIE!
+    } else if (order[player] === order[computer + 1]) {
+      // PLAYER WON!
+    } else if (order[player] === order[computer + 2]) {
+      // PLAYER WON!
+    } else {
+    /**  because the player also wins with the difference of 2 (before addition of 1)  **/
+      // COMPUTER WON!
+    };
 
 But here is a little problem, if the computer choses MATCH and the player chooses PAPER, normally the computer would win. But not with this three if's. There's another if necessary and then the code will get messy and unclear. The solution could be to find a way calculate the worth of a game and put it in a switch statement - see second idea.
 
