@@ -4,7 +4,12 @@ import { DebugElement, EventEmitter} from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { PlayerComponent } from './player.component';
+import { GameComponent } from '../game/game.component';
 import { MdCard } from '@angular/material';
+
+import { ComputerComponent } from '../computer/computer.component';
+import { ScoreComponent } from '../score/score.component';
+import { WinnerDisplayComponent } from '../winner-display/winner-display.component';
 
 describe('PlayerComponent', () => {
   let component: PlayerComponent;
@@ -14,7 +19,11 @@ describe('PlayerComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         PlayerComponent,
-        MdCard
+        GameComponent,
+        MdCard,
+        ComputerComponent,
+        ScoreComponent,
+        WinnerDisplayComponent
         ]
     })
     .compileComponents();
@@ -22,6 +31,7 @@ describe('PlayerComponent', () => {
 
   beforeEach( async(() => {
     fixture = TestBed.createComponent(PlayerComponent);
+
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
@@ -207,9 +217,16 @@ describe('PlayerComponent', () => {
 
   describe('/ Player - methods', () => {
     let app;
+    let parentApp;
+    let fixtureParent;
+    let parentComponent;
 
     beforeEach( () => {
       app = fixture.debugElement.componentInstance;
+      fixtureParent = TestBed.createComponent(GameComponent);
+      parentApp = fixtureParent.debugElement.componentInstance;
+      parentComponent = fixtureParent.componentInstance;
+      jasmine.clock().install();
     });
 
     it('should have method "setPlayersChoice()"', () => {
@@ -217,14 +234,13 @@ describe('PlayerComponent', () => {
       expect(app.setPlayersChoice).toBeDefined();
     });
 
-    // TODO: Is not yet ready 
-    // fit('setPlayersChoice() should have called choiceSet.emit(choice)', () => {
-    //   // app = fixture.debugElement.componentInstance;
-    //   const spy = spyOn(component, 'choiceSet.emit()');
-    //   const choice = 'paper';
-    //   app.setPlayersChoice(choice);
-    //   expect(spy).toHaveBeenCalled();
-    // });
+    it('setPlayersChoice() emit', () => {
+      const spy = spyOn(parentComponent, 'setPlayersChoice');
+      app.setPlayersChoice('paper');
+      jasmine.clock().tick(100);
+      expect(spy).toHaveBeenCalled();
+      jasmine.clock().uninstall();
+    });
 
   });
 });
