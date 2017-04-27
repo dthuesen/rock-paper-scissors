@@ -22,26 +22,44 @@ export class GameComponent {
     'Ihr habt beide haben das Gleiche gezogen!'
     ];
 
-  playerText       = '';
-  computerText     = '';
+  // computerText     = '';
+  // playerText       = '';
+  computerText     = 'Computer wartet auf dich...';
+  playerText       = 'Spiel deine Hand!';
 
   restartIsActive  = false;
   buttonsDisabled  = false;
 
   constructor() {
-    this.startGame();
+    /**
+     *  INFO:: This function call below is not necessary anymore.
+     *  It stays only for illustrating the refactoring (CASE 1).
+     *  DONE: Remove spec
+     * */
+    // this.startGame();
   }
 
-  // (T)
-  startGame() {
-    this.displayStartHeadlines();
-  }
+  /**
+   *  INFO:: The method startGame() below has no additional aspect. It is not necessary anymore.
+   *  It stays only for illustrating the refactoring (CASE 1).
+   *  DONE: Remove spec
+   * */
+  // // (T) - This method is a place for more starting actions otherwise spare
+  // or move method body from displayStartHeadlines() into this method.
+  // startGame() {
+  //   // this.displayStartHeadlines();
+  // }
 
-  // (T) Setting friendly text to start the game
-  displayStartHeadlines() {
-    this.computerText = 'Computer wartet auf dich...';
-    this.playerText   = 'Spiel deine Hand!';
-  }
+  /**
+   *  INFO:: The method displayStartHeadlines() below has no additional aspect. It is not necessary anymore.
+   *  It stays only for illustrating the refactoring (CASE 1).
+   *  DONE: Remove spec
+   * */
+  // // (T) Setting friendly text to start the game
+  // displayStartHeadlines() {
+  //   this.computerText = 'Computer wartet auf dich...';
+  //   this.playerText   = 'Spiel deine Hand!';
+  // }
 
   // (T) Translates the Text of the button event into numbers.
   // Although this step is not necessary it makes the button
@@ -104,7 +122,6 @@ export class GameComponent {
   // and sets it as text to display later in game component
   countdown() {
 
-
     setTimeout( () => {
       this.computerText = 'Schere';
     }, 800);
@@ -120,6 +137,7 @@ export class GameComponent {
     setTimeout( () => {
       this.setComputersChoice();
     }, 4500);
+
   }
 
   // (T) Simulates the computers choice
@@ -188,7 +206,12 @@ export class GameComponent {
     this.computerText      = 'Computer wartet auf dich...';
     this.restartIsActive   = false;
     this.buttonsDisabled   = false;
-    this.startGame();
+    /**
+     *  INFO:: This function call below is not necessary anymore.
+     *  It stays only for illustrating the refactoring (CASE 1).
+     *  DONE: Remove spec
+     * */
+    // this.startGame();
   }
 
 }
