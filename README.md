@@ -62,7 +62,7 @@ Run the command `ng test --code-coverage --reporters=coverage-istanbul`. It take
 
 Actual test coverage: 100% :-)
 
-<img src="./testcoverage.png" />
+![testcoverage](/testcoverage.png)
 
 ## Styling
 
