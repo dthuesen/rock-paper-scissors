@@ -34,7 +34,6 @@ export class GameComponent {
     /**
      *  INFO:: This function call below is not necessary anymore.
      *  It stays only for illustrating the refactoring (CASE 1).
-     *  DONE: Remove spec
      * */
     // this.startGame();
   }
@@ -42,7 +41,6 @@ export class GameComponent {
   /**
    *  INFO:: The method startGame() below has no additional aspect. It is not necessary anymore.
    *  It stays only for illustrating the refactoring (CASE 1).
-   *  DONE: Remove spec
    * */
   // // (T) - This method is a place for more starting actions otherwise spare
   // or move method body from displayStartHeadlines() into this method.
@@ -53,7 +51,6 @@ export class GameComponent {
   /**
    *  INFO:: The method displayStartHeadlines() below has no additional aspect. It is not necessary anymore.
    *  It stays only for illustrating the refactoring (CASE 1).
-   *  DONE: Remove spec
    * */
   // // (T) Setting friendly text to start the game
   // displayStartHeadlines() {
@@ -209,7 +206,6 @@ export class GameComponent {
     /**
      *  INFO:: This function call below is not necessary anymore.
      *  It stays only for illustrating the refactoring (CASE 1).
-     *  DONE: Remove spec
      * */
     // this.startGame();
   }
