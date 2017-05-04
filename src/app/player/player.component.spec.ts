@@ -86,7 +86,7 @@ describe('PlayerComponent', () => {
      *
      *  One of both must be disabled for testing
      */
-    xdescribe('/ h1 + h2 tags', () => {
+    describe('/ h1 + h2 tags', () => {
 
       it('should be able to render a h1 tag', async( () => {
         fixture.detectChanges();
@@ -137,12 +137,12 @@ describe('PlayerComponent', () => {
      */
     xdescribe('/ buttons', () => {
       // The button specs have interferences with themselves!?!
-      xit('should be able to render a div with id buttons', () => {
+      it('should be able to render a div with id buttons', () => {
         const compiled = fixture.debugElement.query(By.css('div#buttons'));
         expect(compiled).not.toBe(null);
       });
       // The button specs have interferences with themselves!?!
-      xit('should be able to render a button with id btn-rock', () => {
+      it('should be able to render a button with id btn-rock', () => {
         fixture.detectChanges();
         const compiled = fixture.debugElement.query(By.css('#btn-rock'));
         const app = fixture.debugElement.componentInstance;
@@ -151,7 +151,7 @@ describe('PlayerComponent', () => {
         expect(compiled).not.toBe(null);
       });
       // The button specs have interferences with themselves!?!
-      xit('should be able to render a button with id btn-paper', () => {
+      it('should be able to render a button with id btn-paper', () => {
         fixture.detectChanges();
         const compiled = fixture.debugElement.query(By.css('#btn-paper'));
         const app = fixture.debugElement.componentInstance;
@@ -160,7 +160,7 @@ describe('PlayerComponent', () => {
         expect(compiled).not.toBe(null);
       });
       // The button specs have interferences with themselves!?!
-      xit('should be able to render a button with id btn-scissors', () => {
+      it('should be able to render a button with id btn-scissors', () => {
         fixture.detectChanges();
         const compiled = fixture.debugElement.query(By.css('#btn-scissors'));
         const app = fixture.debugElement.componentInstance;
@@ -169,7 +169,7 @@ describe('PlayerComponent', () => {
         expect(compiled).not.toBe(null);
       });
       // The button specs have interferences with themselves!?!
-      xit('Button with id btn-rock should be disabled if set to disabled', () => {
+      it('Button with id btn-rock should be disabled if set to disabled', () => {
         fixture.detectChanges();
         const app = fixture.debugElement.componentInstance;
         app.buttonsDisabled = true;
@@ -226,20 +226,32 @@ describe('PlayerComponent', () => {
       fixtureParent = TestBed.createComponent(GameComponent);
       parentApp = fixtureParent.debugElement.componentInstance;
       parentComponent = fixtureParent.componentInstance;
-      jasmine.clock().install();
+    });
+
+    afterEach( () => {
     });
 
     it('should have method "setPlayersChoice()"', () => {
-      // app = fixture.debugElement.componentInstance;
       expect(app.setPlayersChoice).toBeDefined();
     });
 
-    it('setPlayersChoice() emit', () => {
-      const spy = spyOn(parentComponent, 'setPlayersChoice');
+    it('setPlayersChoice(rock) emit', () => {
+      // const spy = spyOn(component, 'setPlayersChoice');
+      const spy = spyOn(component.choiceSet, 'emit');
+      app.setPlayersChoice('rock');
+      expect(spy).toHaveBeenCalledWith('rock');
+    });
+    it('setPlayersChoice(paper) emit', () => {
+      // const spy = spyOn(component, 'setPlayersChoice');
+      const spy = spyOn(component.choiceSet, 'emit');
       app.setPlayersChoice('paper');
-      jasmine.clock().tick(100);
-      expect(spy).toHaveBeenCalled();
-      jasmine.clock().uninstall();
+      expect(spy).toHaveBeenCalledWith('paper');
+    });
+    it('setPlayersChoice(scissors) emit', () => {
+      // const spy = spyOn(component, 'setPlayersChoice');
+      const spy = spyOn(component.choiceSet, 'emit');
+      app.setPlayersChoice('scissors');
+      expect(spy).toHaveBeenCalledWith('scissors');
     });
 
   });
