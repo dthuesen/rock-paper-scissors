@@ -73,7 +73,7 @@ describe('PlayerComponent', () => {
   });
 
   /**
-   *  This test suite is disabled because the containing sub suits 
+   *  This test suite is disabled because the containing sub suits
    *  have interferences with other tests suites.
    *  For further details see test suits inside.
    */
@@ -168,6 +168,32 @@ describe('PlayerComponent', () => {
         fixture.detectChanges();
         expect(compiled).not.toBe(null);
       });
+
+
+      /** vvv----  New Specs  vvv---___---===---___---===---___---===---___---===---___---===---___---=== */
+
+      it('should be able to render a button with id btn-fountain', () => {
+        fixture.detectChanges();
+        const compiled = fixture.debugElement.query(By.css('#btn-fountain'));
+        const app = fixture.debugElement.componentInstance;
+        app.buttonsDisabled = false;
+        fixture.detectChanges();
+        expect(compiled).not.toBe(null);
+      });
+
+      it('should be able to render a button with id btn-match', () => {
+        fixture.detectChanges();
+        const compiled = fixture.debugElement.query(By.css('#btn-match'));
+        const app = fixture.debugElement.componentInstance;
+        app.buttonsDisabled = false;
+        fixture.detectChanges();
+        expect(compiled).not.toBe(null);
+      });
+
+      /*  ^^^----  New Specs  ^^^---___---===---___---===---___---===---___---===---___---===---___---=== */
+
+
+
       // The button specs have interferences with themselves!?!
       it('Button with id btn-rock should be disabled if set to disabled', () => {
         fixture.detectChanges();
@@ -211,6 +237,40 @@ describe('PlayerComponent', () => {
         fixture.detectChanges();
       });
 
+      /** vvv----  New Specs  vvv---___---===---___---===---___---===---___---===---___---===---___---=== */
+
+      // The button specs have interferences with themselves!?!
+      it('Button with id btn-match should be disabled if set to disabled', () => {
+        fixture.detectChanges();
+        const app = fixture.debugElement.componentInstance;
+        app.buttonsDisabled = true;
+        fixture.detectChanges();
+        const compiled = fixture.debugElement.query(By.css('#btn-macht'));
+        const disabled = compiled.properties.disabled;
+        console.log('button: ', disabled);
+        fixture.detectChanges();
+        expect(disabled).toBe(true);
+        app.buttonsDisabled = false;
+        fixture.detectChanges();
+      });
+
+      // The button specs have interferences with themselves!?!
+      it('Button with id btn-fountain should be disabled if set to disabled', () => {
+        fixture.detectChanges();
+        const app = fixture.debugElement.componentInstance;
+        app.buttonsDisabled = true;
+        fixture.detectChanges();
+        const compiled = fixture.debugElement.query(By.css('#btn-fountain'));
+        const disabled = compiled.properties.disabled;
+        console.log('button: ', disabled);
+        fixture.detectChanges();
+        expect(disabled).toBe(true);
+        app.buttonsDisabled = false;
+        fixture.detectChanges();
+      });
+
+      /*  ^^^----  New Specs  ^^^---___---===---___---===---___---===---___---===---___---===---___---=== */
+
     });
 
   });
@@ -241,18 +301,36 @@ describe('PlayerComponent', () => {
       app.setPlayersChoice('rock');
       expect(spy).toHaveBeenCalledWith('rock');
     });
+
     it('setPlayersChoice(paper) emit', () => {
       // const spy = spyOn(component, 'setPlayersChoice');
       const spy = spyOn(component.choiceSet, 'emit');
       app.setPlayersChoice('paper');
       expect(spy).toHaveBeenCalledWith('paper');
     });
+
     it('setPlayersChoice(scissors) emit', () => {
       // const spy = spyOn(component, 'setPlayersChoice');
       const spy = spyOn(component.choiceSet, 'emit');
       app.setPlayersChoice('scissors');
       expect(spy).toHaveBeenCalledWith('scissors');
     });
+
+    /** vvv----  New Specs  vvv---___---===---___---===---___---===---___---===---___---===---___---=== */
+
+    it('setPlayersChoice(fountain) emit', () => {
+      const spy = spyOn(component.choiceSet, 'emit');
+      app.setPlayersChoice('fountain');
+      expect(spy).toHaveBeenCalledWith('fountain');
+    });
+
+    it('setPlayersChoice(match) emit', () => {
+      const spy = spyOn(component.choiceSet, 'emit');
+      app.setPlayersChoice('match');
+      expect(spy).toHaveBeenCalledWith('match');
+    });
+
+    /*  ^^^----  New Specs  ^^^---___---===---___---===---___---===---___---===---___---===---___---=== */
 
   });
 });

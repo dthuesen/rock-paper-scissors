@@ -1,11 +1,13 @@
 <div>
   <md-card class="background-middle-dark">
-    <h1 class="ranchers-1">Player: </h1>
-    <h2 class="light-text ranchers-2-dark">{{playerDisplayText}}</h2>
+    <h1 class="label-text ranchers-1">Player: </h1>
+    <h2 class="action-text ranchers-2-dark">{{playerDisplayText}}</h2>
     <div id="buttons" class="list">
       <button class="game-button tile" md-raised-button primary id="btn-scissors" (click)="setPlayersChoice('scissors')" [disabled]="buttonsDisabled">Schere</button>
       <button class="game-button tile" md-raised-button primary id="btn-rock" (click)="setPlayersChoice('rock')" [disabled]="buttonsDisabled">Stein</button>
       <button class="game-button tile" md-raised-button primary id="btn-paper" (click)="setPlayersChoice('paper')" [disabled]="buttonsDisabled">Papier</button>
+      <button class="game-button tile" md-raised-button primary id="btn-fountain" (click)="setPlayersChoice('fountain')" [disabled]="buttonsDisabled">Brunnen</button>
+      <button class="game-button tile" md-raised-button primary id="btn-match" (click)="setPlayersChoice('match')" [disabled]="buttonsDisabled">Streichholz</button>
     </div>
   </md-card>
   <div>

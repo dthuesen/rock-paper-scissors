@@ -114,10 +114,10 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
           expect(app.winnerDisplayText).not.toBe(undefined);
         });
 
-        it('should have a property "reason"', () => {
-          const app = fixture.debugElement.componentInstance;
-          expect(app.reason).not.toBe(undefined);
-        });
+        // it('should have a property "reason"', () => {
+        //   const app = fixture.debugElement.componentInstance;
+        //   expect(app.reason).not.toBe(undefined);
+        // });
 
         it('should have a property "playerText"', () => {
           const app = fixture.debugElement.componentInstance;
@@ -236,12 +236,35 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
             expect(app.setComputersChoice).not.toBe(undefined);
           });
 
+          /** vvv--- New Specs vvv--- ---___---===---___---===---___---===---___---===---___---===---___---===---___---===---___---===*/
+
+          it('should have a method "lookup()"', () => {
+            fixture.detectChanges();
+            const app = fixture.debugElement.componentInstance;
+            // let = 4;
+            expect(app.lookup).not.toBe(undefined);
+          });
+
+          it('"lookup()" should return 5 for 4 or 9 for 5', () => {
+            fixture.detectChanges();
+            const app = fixture.debugElement.componentInstance;
+            // fixture.detectChanges();
+            expect(app.lookup(1)).toBe(1);
+            expect(app.lookup(2)).toBe(2);
+            expect(app.lookup(3)).toBe(3);
+            expect(app.lookup(4)).toBe(5);
+            expect(app.lookup(5)).toBe(9);
+            expect(app.lookup(42)).toBe(undefined);
+          });
+
+          /** ^^^--- New Specs ^^^--- ---___---===---___---===---___---===---___---===---___---===---___---===---___---===---___---===*/
+
           it('"setComputersChoice()" it\'s variable should get a random number', () => {
             const app = fixture.debugElement.componentInstance;
             app.setComputersChoice();
             fixture.detectChanges();
             expect(app.computersChoice).toBeGreaterThan(0);
-            expect(app.computersChoice).toBeLessThan(4);
+            expect(app.computersChoice).toBeLessThan(10);
           });
 
           it('"setComputersChoice()" should have called setComputersChoiceText()', () => {
@@ -294,13 +317,29 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
             expect(app.computerText === computerText).toBe(true);
           });
 
+          /** vvv--- New Specs vvv--- ---___---===---___---===---___---===---___---===---___---===---___---===---___---===---___---===*/
+
+          it('setComputersChoiceText(5) should translate "Computer spielt Brunnen"', () => {
+            const computerText = 'Computer spielt Brunnen';
+            const app = fixture.debugElement.componentInstance;
+            app.setComputersChoiceText(5);
+            expect(app.computerText === computerText).toBe(true);
+          });
+
+          it('setComputersChoiceText(9) should translate "Computer spielt Streichholz"', () => {
+            const computerText = 'Computer spielt Streichholz';
+            const app = fixture.debugElement.componentInstance;
+            app.setComputersChoiceText(9);
+            expect(app.computerText === computerText).toBe(true);
+          });
+
+          /** ^^^--- New Specs ^^^--- ---___---===---___---===---___---===---___---===---___---===---___---===---___---===---___---===*/
+
         });
 
         describe('/ 4. Game - methods for calculating the winner', () => {
 
-
-
-          it('should have a method "randomNumber()"', () => {
+          it('should have a method "randomDraw()"', () => {
             const app = fixture.debugElement.componentInstance;
             expect(app.randomNumber).not.toBe(undefined);
           });
@@ -359,6 +398,57 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
             expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
           });
 
+          /** New Specs ---___---===---___---===---___---===---___---===---___---===---___---===---___---===---___---===*/
+
+          it('"calculateWinner()" with drawn hands 3:5 should set property winnerDisplayText to "Computer gewinnt!"', () => {
+            const winnerDisplayText = 'Computer gewinnt!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(3, 5);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
+          it('"calculateWinner()" with drawn hands 3:9 should set property winnerDisplayText to "Du gewinnst!"', () => {
+            const winnerDisplayText = 'Du gewinnst!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(3, 9);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
+          it('"calculateWinner()" with drawn hands 2:5 should set property winnerDisplayText to "Du gewinnst!"', () => {
+            const winnerDisplayText = 'Du gewinnst!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(2, 5);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
+          it('"calculateWinner()" with drawn hands 2:9 should set property winnerDisplayText to "Computer gewinnt!"', () => {
+            const winnerDisplayText = 'Computer gewinnt!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(2, 9);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
+          it('"calculateWinner()" with drawn hands 1:5 should set property winnerDisplayText to "Du gewinnst!"', () => {
+            const winnerDisplayText = 'Du gewinnst!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(9, 5);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
+          it('"calculateWinner()" with drawn hands 1:5 should set property winnerDisplayText to "Du gewinnst!"', () => {
+            const winnerDisplayText = 'Du gewinnst!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(5, 1);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
+          it('"calculateWinner()" with drawn hands 1:9 should set property winnerDisplayText to "Du gewinnst!"', () => {
+            const winnerDisplayText = 'Du gewinnst!';
+            const app = fixture.debugElement.componentInstance;
+            app.calculateWinner(1, 9);
+            expect(app.winnerDisplayText === winnerDisplayText).toBe(true);
+          });
+
         });
 
       });
@@ -390,19 +480,72 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
             jasmine.clock().uninstall();
           });
 
-          it('Before 2.5s the property "computerText" should NOT contain "Stein"',  () => {
+          it('Before 1.5s the property "computerText" should NOT contain "Stein"',  () => {
             app.countdown();
-            jasmine.clock().tick(2499);
+            jasmine.clock().tick(1499);
             expect(app.computerText).not.toContain('Stein');
             jasmine.clock().uninstall();
           });
 
-          it('Before 3.5s the property "computerText" should NOT contain "Papier"',  () => {
+          it('Before 2.5s the property "computerText" should NOT contain "Papier"',  () => {
             app.countdown();
-            jasmine.clock().tick(3499);
+            jasmine.clock().tick(2499);
             expect(app.computerText).not.toContain('Papier');
             jasmine.clock().uninstall();
           });
+
+          /** vvv--- New Specs vvv--- ---___---===---___---===---___---===---___---===---___---===---___---===---___---===---___---===*/
+
+          it('Before 3.5s the property "computerText" should NOT contain "Brunnen"',  () => {
+            app.countdown();
+            jasmine.clock().tick(3499);
+            expect(app.computerText).not.toContain('Brunnen');
+            jasmine.clock().uninstall();
+          });
+
+          it('Before 4.5s the property "computerText" should NOT contain "Streichholz"',  () => {
+            app.countdown();
+            jasmine.clock().tick(4499);
+            expect(app.computerText).not.toContain('Streichholz');
+            jasmine.clock().uninstall();
+          });
+
+          it('After 0.8s the property "computerText" should contain "Schere"',  () => {
+            app.countdown();
+            jasmine.clock().tick(800);
+            expect(app.computerText).toContain('Schere');
+            jasmine.clock().uninstall();
+          });
+
+          it('After 1.5s the property "computerText" should contain "Stein"',  () => {
+            app.countdown();
+            jasmine.clock().tick(1500);
+            expect(app.computerText).toContain('Stein');
+            jasmine.clock().uninstall();
+          });
+
+          it('After 2.5s the property "computerText" should contain "Papier"',  () => {
+            app.countdown();
+            jasmine.clock().tick(2500);
+            expect(app.computerText).toContain('Papier');
+            jasmine.clock().uninstall();
+          });
+
+          it('After 3.5s the property "computerText" should contain "Brunnen"',  () => {
+            app.countdown();
+            jasmine.clock().tick(3500);
+            expect(app.computerText).toContain('Brunnen');
+            jasmine.clock().uninstall();
+          });
+
+          it('After 4.5s the property "computerText" should contain "Streichholz"',  () => {
+            app.countdown();
+            jasmine.clock().tick(4500);
+            expect(app.computerText).toContain('Streichholz');
+            jasmine.clock().uninstall();
+          });
+
+          /** ^^^--- New Specs ^^^--- ---___---===---___---===---___---===---___---===---___---===---___---===---___---===---___---===*/
         });
 
         describe('/ Gamelogic timing tests - methods', () => {
@@ -426,13 +569,13 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
 
           it('After 2.5s the method countdown() should set property "computerText" to "Stein"',  () => {
             app.countdown();
-            jasmine.clock().tick(2500);
+            jasmine.clock().tick(1500);
             expect(app.computerText).toContain('Stein');
           });
 
           it('After 3.5s the method countdown() should set property "computerText" to "Papier"',  () => {
             app.countdown();
-            jasmine.clock().tick(3500);
+            jasmine.clock().tick(2500);
             expect(app.computerText).toContain('Papier');
           });
 
@@ -440,7 +583,7 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
             const spy = spyOn(component, 'setComputersChoice');
             app.countdown();
             expect(spy).not.toHaveBeenCalled();
-            jasmine.clock().tick(4500);
+            jasmine.clock().tick(5000);
             expect(spy).toHaveBeenCalled();
           });
 

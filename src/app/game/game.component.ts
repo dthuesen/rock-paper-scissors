@@ -15,12 +15,19 @@ export class GameComponent {
   computersChoice:  number = null;
   winnerDisplayText = '';
   reason            = '';
-  reasons            = [
-    'Papier wickelt den Stein ein',
-    'Schere schneidet Papier',
-    'Stein macht die Schere stumpf',
-    'Ihr habt beide haben das Gleiche gezogen!'
-    ];
+  // reasons            = [
+  //   'Papier wickelt den Stein ein',
+  //   'Schere schneidet Papier',
+  //   'Stein macht die Schere stumpf',
+  //   'Ihr habt beide haben das Gleiche gezogen!',
+  //   'Schere fällt in den Brunnen!',
+  //   'Schere zerschneidet Streichholz',
+  //   'Streichholz verbrennt Papier',
+  //   'Papier schwimmt im Brunnen',
+  //   'Streichhholz schwimmt im Brunnen',
+  //   'Stein zerschlägt Streichholz',
+  //   'Stein fällt in den Brunnen'
+  //   ];
 
   // computerText     = '';
   // playerText       = '';
@@ -30,33 +37,9 @@ export class GameComponent {
   restartIsActive  = false;
   buttonsDisabled  = false;
 
-  constructor() {
-    /**
-     *  INFO:: This function call below is not necessary anymore.
-     *  It stays only for illustrating the refactoring (CASE 1).
-     * */
-    // this.startGame();
-  }
+  constructor() {}
 
-  /**
-   *  INFO:: The method startGame() below has no additional aspect. It is not necessary anymore.
-   *  It stays only for illustrating the refactoring (CASE 1).
-   * */
-  // // (T) - This method is a place for more starting actions otherwise spare
-  // or move method body from displayStartHeadlines() into this method.
-  // startGame() {
-  //   // this.displayStartHeadlines();
-  // }
 
-  /**
-   *  INFO:: The method displayStartHeadlines() below has no additional aspect. It is not necessary anymore.
-   *  It stays only for illustrating the refactoring (CASE 1).
-   * */
-  // // (T) Setting friendly text to start the game
-  // displayStartHeadlines() {
-  //   this.computerText = 'Computer wartet auf dich...';
-  //   this.playerText   = 'Spiel deine Hand!';
-  // }
 
   // (T) Translates the Text of the button event into numbers.
   // Although this step is not necessary it makes the button
@@ -81,6 +64,16 @@ export class GameComponent {
       case 'scissors':
         this.playersChoice = 3;
         this.playerText = 'Du spielst Schere.';
+        this.countdown();
+        break;
+      case 'fountain':
+        this.playersChoice = 5;
+        this.playerText = 'Du spielst Brunnen.';
+        this.countdown();
+        break;
+      case 'match':
+        this.playersChoice = 9;
+        this.playerText = 'Du spielst Streichholz.';
         this.countdown();
         break;
     }
@@ -111,6 +104,12 @@ export class GameComponent {
       case 3:
         this.computerText = 'Computer spielt Schere';
         break;
+      case 5:
+        this.computerText = 'Computer spielt Brunnen';
+        break;
+      case 9:
+        this.computerText = 'Computer spielt Streichholz';
+        break;
     }
     console.log('Set computers choice: ', this.computerText);
   }
@@ -125,21 +124,34 @@ export class GameComponent {
 
     setTimeout( () => {
       this.computerText = 'Stein';
-    }, 2500);
+    }, 1500);
 
     setTimeout( () => {
       this.computerText = 'Papier';
+    }, 2500);
+    
+    setTimeout( () => {
+      this.computerText = 'Brunnen';
     }, 3500);
 
     setTimeout( () => {
-      this.setComputersChoice();
+      this.computerText = 'Streichholz';
     }, 4500);
 
+    setTimeout( () => {
+      this.setComputersChoice();
+    }, 5000);
+
+  }
+
+  lookup(index: number  = 1) {
+    const  lookupTable = [1, 2, 3, 5, 9];
+    return lookupTable[index - 1];
   }
 
   // (T) Simulates the computers choice
   randomNumber() {
-    return Math.floor(Math.random() * 3) + 1;
+    return Math.floor(Math.random() * 5) + 1;
   }
 
   // (T) This method has two tasks:
@@ -151,42 +163,109 @@ export class GameComponent {
     console.log('value:', value);
     if (player === computer) {
       this.winnerDisplayText = 'Unentschieden!';
-      this.reason = this.reasons[3];
+      this.reason = 'Ihr habt beide haben das Gleiche gezogen!';
       return;
     }
     switch (value) {
-       case 3:
+      case 3:
         if (player > computer) {
           this.winnerDisplayText = 'Du gewinnst!';
-          this.reason = this.reasons[0];
           this.playersScore = this.playersScore + 1;
         } else {
           this.winnerDisplayText = 'Computer gewinnt!';
-          this.reason = this.reasons[0];
           this.computersScore = this.computersScore + 1;
         }
+        this.reason = 'Papier wickelt den Stein ein';
         break;
       case 5:
         if (player > computer) {
           this.winnerDisplayText = 'Du gewinnst!';
-          this.reason = this.reasons[1];
           this.playersScore = this.playersScore + 1;
         } else {
           this.winnerDisplayText = 'Computer gewinnt!';
-          this.reason = this.reasons[1];
           this.computersScore = this.computersScore + 1;
         }
+        this.reason = 'Schere schneidet Papier';
         break;
       case 4:
         if (player < computer) {
           this.winnerDisplayText = 'Du gewinnst!';
-          this.reason = this.reasons[2];
           this.playersScore = this.playersScore + 1;
         } else {
           this.winnerDisplayText = 'Computer gewinnt!';
-          this.reason = this.reasons[2];
           this.computersScore = this.computersScore + 1;
         }
+        this.reason = 'Stein macht die Schere stumpf';
+        break;
+      case 8:
+        if (player > computer) {
+          this.winnerDisplayText = 'Du gewinnst!';
+          this.playersScore = this.playersScore + 1;
+        } else {
+          this.winnerDisplayText = 'Computer gewinnt!';
+          this.computersScore = this.computersScore + 1;
+        }
+        this.reason = 'Schere fällt in den Brunnen!';
+        break;
+      case 12:
+        if (player < computer) {
+          this.winnerDisplayText = 'Du gewinnst!';
+          this.playersScore = this.playersScore + 1;
+        } else {
+          this.winnerDisplayText = 'Computer gewinnt!';
+          this.computersScore = this.computersScore + 1;
+        }
+        this.reason = 'Schere zerschneidet Streichholz';
+        break;
+      case 7:
+        if (player < computer) {
+          this.winnerDisplayText = 'Du gewinnst!';
+          this.playersScore = this.playersScore + 1;
+        } else {
+          this.winnerDisplayText = 'Computer gewinnt!';
+          this.computersScore = this.computersScore + 1;
+        }
+        this.reason = 'Papier schwimmt im Brunnen';
+        break;
+      case 11:
+        if (player > computer) {
+          this.winnerDisplayText = 'Du gewinnst!';
+          this.playersScore = this.playersScore + 1;
+        } else {
+          this.winnerDisplayText = 'Computer gewinnt!';
+          this.computersScore = this.computersScore + 1;
+        }
+        this.reason = 'Streichholz verbrennt Papier';
+        break;
+      case 14:
+        if (player > computer) {
+          this.winnerDisplayText = 'Du gewinnst!';
+          this.playersScore = this.playersScore + 1;
+        } else {
+          this.winnerDisplayText = 'Computer gewinnt!';
+          this.computersScore = this.computersScore + 1;
+        }
+        this.reason = 'Streichhholz schwimmt im Brunnen';
+        break;
+      case 6:
+        if (player > computer) {
+          this.winnerDisplayText = 'Du gewinnst!';
+          this.playersScore = this.playersScore + 1;
+        } else {
+          this.winnerDisplayText = 'Computer gewinnt!';
+          this.computersScore = this.computersScore + 1;
+        }
+        this.reason = 'Stein fällt in den Brunnen';
+        break;
+      case 10:
+        if (player < computer) {
+          this.winnerDisplayText = 'Du gewinnst!';
+          this.playersScore = this.playersScore + 1;
+        } else {
+          this.winnerDisplayText = 'Computer gewinnt!';
+          this.computersScore = this.computersScore + 1;
+        }
+        this.reason = 'Stein zerschlägt Streichholz';
         break;
     }
     console.log(`Score - Du: ${this.playersScore} : ${this.computersScore} Computer `);
@@ -203,11 +282,6 @@ export class GameComponent {
     this.computerText      = 'Computer wartet auf dich...';
     this.restartIsActive   = false;
     this.buttonsDisabled   = false;
-    /**
-     *  INFO:: This function call below is not necessary anymore.
-     *  It stays only for illustrating the refactoring (CASE 1).
-     * */
-    // this.startGame();
   }
 
 }
