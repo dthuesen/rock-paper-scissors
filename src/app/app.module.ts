@@ -20,6 +20,7 @@ import {
   MdCardModule,
   MdGridListModule
   } from '@angular/material';
+import { HighscoresComponent } from './highscores/highscores.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {
     routingComponents,
     ScoreComponent,
     WinnerDisplayComponent,
+    HighscoresComponent,
   ],
   imports: [
     appRouting,
