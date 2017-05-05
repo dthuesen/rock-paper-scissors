@@ -22,6 +22,9 @@ import {
   } from '@angular/material';
 import { HighscoresComponent } from './highscores/highscores.component';
 
+// Services
+import { HighscoresService } from './highscores.service';
+
 
 @NgModule({
   declarations: [
@@ -45,7 +48,7 @@ import { HighscoresComponent } from './highscores/highscores.component';
     MdButtonModule,
     MdGridListModule,
   ],
-  providers: [],
+  providers: [HighscoresService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
