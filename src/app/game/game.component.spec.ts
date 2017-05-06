@@ -1,13 +1,21 @@
 /* tslint:disable:no-unused-variable */
 import { async, fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { ComputerComponent } from '../computer/computer.component';
 import { GameComponent } from './game.component';
 import { PlayerComponent } from '../player/player.component';
 import { ScoreComponent } from '../score/score.component';
+import { HighscoresComponent } from '../highscores/highscores.component';
 import { WinnerDisplayComponent } from '../winner-display/winner-display.component';
-import { MdCard } from '@angular/material';
+import { HighscoresService } from '../highscores.service';
+import {
+  MdCard,
+  MdCardContent,
+  MdCardHeader,
+  MdInputContainer
+} from '@angular/material';
 
 describe('Rock, Paper, Stone Game - GameComponent (container component)', () => {
 
@@ -16,10 +24,20 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
       declarations: [
         ComputerComponent,
         GameComponent,
+        HighscoresComponent,
         PlayerComponent,
         ScoreComponent,
         WinnerDisplayComponent,
-        MdCard
+        MdCard,
+        MdCardContent,
+        MdCardHeader,
+        MdInputContainer,
+      ],
+      imports: [
+        FormsModule
+      ],
+      providers: [
+        HighscoresService,
       ]
     })
     .compileComponents();
@@ -73,9 +91,9 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
 
       it('should render button "Neustart"', () => {
         const compiled = fixture.debugElement.nativeElement;
-        const app = fixture.debugElement.componentInstance;
-        app.restartIsActive = true;
-        fixture.detectChanges();
+        // const app = fixture.debugElement.componentInstance;
+        // app.restartIsActive = true;
+        // fixture.detectChanges();
         expect(compiled.querySelector('button#new-game').textContent).toContain('Neustart');
       });
 
@@ -192,11 +210,13 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
             app.setPlayersChoice('rock');
             expect(app.restartIsActive).toBe(true);
           });
+
           it('"setPlayersChoice(paper)" should set property "restartIsActive" to true', () => {
             const app = fixture.debugElement.componentInstance;
             app.setPlayersChoice('paper');
             expect(app.restartIsActive).toBe(true);
           });
+
           it('"setPlayersChoice(scissors)" should set property "restartIsActive" to true', () => {
             const app = fixture.debugElement.componentInstance;
             app.setPlayersChoice('scissors');
@@ -218,14 +238,12 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
           it('should have a method "lookup()"', () => {
             fixture.detectChanges();
             const app = fixture.debugElement.componentInstance;
-            // let = 4;
             expect(app.lookup).not.toBe(undefined);
           });
 
           it('"lookup()" should return 5 for 4 or 9 for 5', () => {
             fixture.detectChanges();
             const app = fixture.debugElement.componentInstance;
-            // fixture.detectChanges();
             expect(app.lookup(1)).toBe(1);
             expect(app.lookup(2)).toBe(2);
             expect(app.lookup(3)).toBe(3);
