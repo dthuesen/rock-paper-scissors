@@ -103,6 +103,7 @@ fdescribe('HighscoresComponent', () => {
     it('should have a method emitPlayerData()', () => {
       fixture.detectChanges();
       const app = fixture.debugElement.componentInstance;
+      expect(app.emitPlayerData).not.toBe(undefined);
       expect(typeof component.emitPlayerData === 'function').toBe(true);
     });
 
