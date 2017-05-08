@@ -54,6 +54,13 @@ The specs and suits are written for use of Jasmine (used in this app: v~2.5.2) a
 
 To start the test run type: **`ng test`**
 
+**PERFORMANCE TIP: Improving performance for test cycles:**
+The standard call for the test is ng test but this leads to a slow pace of the test cycles. turning off the source maps makes it fast as a flash For turning off the source maps call **`ng test --sourcemaps=false`**
+
+Another way to speed-up the testing is to set a focus to only one spec or suite with using `fdescribe()` or `fit()`. Or with turning off several suites with `xdescribe()`.
+
+The speed issue is under observation and there are already some fixes. Maybe a new version of the cli will get big improvements. For following the issue ticket on github see "Test development cycle is slow unless sourcemaps are turned off#5423".
+
 **Some test suites or specs are disabled because of interferences between some tests.**
 
 ### Generate a test coverage report
