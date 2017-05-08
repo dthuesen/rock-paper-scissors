@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HighscoresComponent } from './highscores.component';
 import { MdCard, MdInputContainer, MdInputDirective } from '@angular/material';
 
-fdescribe('HighscoresComponent', () => {
+describe('HighscoresComponent', () => {
   let component: HighscoresComponent;
   let fixture: ComponentFixture<HighscoresComponent>;
 
@@ -36,7 +36,7 @@ fdescribe('HighscoresComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xdescribe('/ Highscores view', () => {
+  describe('/ Highscores view', () => {
 
     it('should render a <md-card> tag', () => {
       const compiled = fixture.debugElement.query(By.css('md-card'));
