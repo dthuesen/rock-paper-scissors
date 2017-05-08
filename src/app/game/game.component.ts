@@ -1,5 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { PlayerComponent } from '../player/player.component';
+import { HighscoresService } from '../highscores.service';
+import { Highscore } from '../shared/highscore.model';
 
 @Component({
   selector: 'app-game',
@@ -15,30 +17,33 @@ export class GameComponent {
   computersChoice:  number = null;
   winnerDisplayText = '';
   reason            = '';
-  // reasons            = [
-  //   'Papier wickelt den Stein ein',
-  //   'Schere schneidet Papier',
-  //   'Stein macht die Schere stumpf',
-  //   'Ihr habt beide haben das Gleiche gezogen!',
-  //   'Schere fällt in den Brunnen!',
-  //   'Schere zerschneidet Streichholz',
-  //   'Streichholz verbrennt Papier',
-  //   'Papier schwimmt im Brunnen',
-  //   'Streichhholz schwimmt im Brunnen',
-  //   'Stein zerschlägt Streichholz',
-  //   'Stein fällt in den Brunnen'
-  //   ];
 
-  // computerText     = '';
-  // playerText       = '';
   computerText     = 'Computer wartet auf dich...';
   playerText       = 'Spiel deine Hand!';
 
+  // Properties for computing and showing highscores
+  currentScore = {
+    namePlayer: '',
+    scorePlayer: 0,
+    scoreComputer: 0,
+    score: 0
+  };
+  highscores: Highscore[];
+  sortedHighscores: Highscore[];
+
+  // Properties for showing and hiding components
   restartIsActive  = false;
   buttonsDisabled  = false;
+  saveHighscoreVisible  = false;
+  showPlayerAndComputer = true;
 
-  constructor() {}
-
+  constructor(
+    @Inject(HighscoresService)
+    private highscoresService: HighscoresService
+  ) {
+    this.highscores = highscoresService.highscores;
+    this.sortedHighscores = highscoresService.sortedHighscores;
+  }
 
 
   // (T) Translates the Text of the button event into numbers.
@@ -77,7 +82,6 @@ export class GameComponent {
         this.countdown();
         break;
     }
-    this.restartIsActive = true;
   }
 
   // (T) The computers choice (number) will be stored for
@@ -89,6 +93,7 @@ export class GameComponent {
     this.setComputersChoiceText(number);
     this.calculateWinner(this.playersChoice, this.computersChoice);
     this.buttonsDisabled = false;
+    this.restartIsActive = true;
   }
 
   // (T) translates the computers choice (number) into text
@@ -129,7 +134,7 @@ export class GameComponent {
     setTimeout( () => {
       this.computerText = 'Papier';
     }, 2500);
-    
+
     setTimeout( () => {
       this.computerText = 'Brunnen';
     }, 3500);
@@ -271,17 +276,50 @@ export class GameComponent {
     console.log(`Score - Du: ${this.playersScore} : ${this.computersScore} Computer `);
   }
 
-  // (T) Resets the counter and starts a new game
+  setPlayerData(event) {
+    // Set players name to current score
+    this.currentScore.namePlayer = event.namePlayer;
+
+    // this.saveHighscore(this.currentScore);
+    // Push highscores to service
+    this.highscoresService.pushHighscore(this.currentScore);
+    this.currentScore = {
+      namePlayer: '',
+      scorePlayer: 0,
+      scoreComputer: 0,
+      score: 0
+    };
+    this.saveHighscoreVisible  = false;
+    this.showPlayerAndComputer = true;
+    this.sortedHighscores = this.highscoresService.sortedHighscores;
+  }
+
+  showSaveHighscore() {
+    // Show HighscoresComponent and hide PlayerComponent & ComputerComponent
+    this.saveHighscoreVisible  = true;
+    this.showPlayerAndComputer = false;
+  }
+
+  // Resets the properties to start values
+  resetScores() {
+    this.playersScore          = 0;
+    this.computersScore        = 0;
+    this.winnerDisplayText     = 'Neues Spiel, neues Glück!';
+    this.playersChoice         = null;
+    this.computersChoice       = null;
+    this.playerText            = 'Spiel deine Hand!';
+    this.computerText          = 'Computer wartet auf dich...';
+    this.restartIsActive       = false;
+    this.buttonsDisabled       = false;
+  }
+
+  // Sets the scores and starts a new game
   newGame() {
-    this.playersScore      = 0;
-    this.computersScore    = 0;
-    this.winnerDisplayText = 'Neues Spiel, neues Glück!';
-    this.playersChoice     = null;
-    this.computersChoice   = null;
-    this.playerText        = 'Spiel deine Hand!';
-    this.computerText      = 'Computer wartet auf dich...';
-    this.restartIsActive   = false;
-    this.buttonsDisabled   = false;
+    this.currentScore.scorePlayer = this.playersScore;
+    this.currentScore.scoreComputer = this.computersScore;
+
+    this.showSaveHighscore();
+    this.resetScores();
   }
 
 }

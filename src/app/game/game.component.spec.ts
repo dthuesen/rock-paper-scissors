@@ -1,13 +1,23 @@
 /* tslint:disable:no-unused-variable */
 import { async, fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ComputerComponent } from '../computer/computer.component';
 import { GameComponent } from './game.component';
 import { PlayerComponent } from '../player/player.component';
 import { ScoreComponent } from '../score/score.component';
+import { HighscoresComponent } from '../highscores/highscores.component';
 import { WinnerDisplayComponent } from '../winner-display/winner-display.component';
-import { MdCard } from '@angular/material';
+import { HighscoresService } from '../highscores.service';
+import {
+  MdCard,
+  MdCardContent,
+  MdCardHeader,
+  MdInputContainer,
+  MdInputDirective
+} from '@angular/material';
 
 describe('Rock, Paper, Stone Game - GameComponent (container component)', () => {
 
@@ -16,10 +26,22 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
       declarations: [
         ComputerComponent,
         GameComponent,
+        HighscoresComponent,
         PlayerComponent,
         ScoreComponent,
         WinnerDisplayComponent,
-        MdCard
+        MdCard,
+        MdCardContent,
+        MdCardHeader,
+        MdInputContainer,
+        MdInputDirective,
+      ],
+      imports: [
+        FormsModule,
+        BrowserAnimationsModule
+      ],
+      providers: [
+        HighscoresService,
       ]
     })
     .compileComponents();
@@ -63,6 +85,14 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
 
       it('should be able to render ComputerComponent tag (<app-score>)', () => {
         const compiled = fixture.debugElement.query(By.css('app-score'));
+        expect(compiled).not.toBe(null);
+      });
+
+      it('should render a <app-highscores> tag', () => {
+        const app = fixture.debugElement.componentInstance;
+        app.saveHighscoreVisible = true;
+        fixture.detectChanges();
+        const compiled = fixture.debugElement.query(By.css('app-highscores'));
         expect(compiled).not.toBe(null);
       });
 
@@ -114,11 +144,6 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
           expect(app.winnerDisplayText).not.toBe(undefined);
         });
 
-        // it('should have a property "reason"', () => {
-        //   const app = fixture.debugElement.componentInstance;
-        //   expect(app.reason).not.toBe(undefined);
-        // });
-
         it('should have a property "playerText"', () => {
           const app = fixture.debugElement.componentInstance;
           expect(app.playerText).toBeTruthy;
@@ -142,29 +167,6 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
       describe('/ Game - methods', () => {
 
         describe('/ 1. Game - methods general', () => {
-
-          // it('should have a method "startGame()"', () => {
-          //   const app = fixture.debugElement.componentInstance;
-          //   expect(app.startGame).not.toBe(undefined);
-          // });
-
-          // it('should have a method "displayStartHeadlines()"', () => {
-          //   const app = fixture.debugElement.componentInstance;
-          //   expect(app.displayStartHeadlines).not.toBe(undefined);
-          // });
-
-          /** 
-           *  TODO: Must be replaced by another implementation of the spec
-           */
-          // it('displayStartHeadlines() should set the right start headlines', () => {
-          //   fixture.detectChanges();
-          //   const computerText = 'Computer wartet auf dich...';
-          //   const playerText   = 'Spiel deine Hand!';
-          //   const app = fixture.debugElement.componentInstance;
-          //   app.displayStartHeadlines();
-          //   expect(app.computerText === computerText).toBe(true);
-          //   expect(app.playerText === playerText).toBe(true);
-          // });
 
           it('should have a method "newGame()"', () => {
             const app = fixture.debugElement.componentInstance;
@@ -210,22 +212,6 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
             expect(app.setPlayersChoice).not.toBe(undefined);
           });
 
-          it('"setPlayersChoice(rock)" should set property "restartIsActive" to true', () => {
-            const app = fixture.debugElement.componentInstance;
-            app.setPlayersChoice('rock');
-            expect(app.restartIsActive).toBe(true);
-          });
-          it('"setPlayersChoice(paper)" should set property "restartIsActive" to true', () => {
-            const app = fixture.debugElement.componentInstance;
-            app.setPlayersChoice('paper');
-            expect(app.restartIsActive).toBe(true);
-          });
-          it('"setPlayersChoice(scissors)" should set property "restartIsActive" to true', () => {
-            const app = fixture.debugElement.componentInstance;
-            app.setPlayersChoice('scissors');
-            expect(app.restartIsActive).toBe(true);
-          });
-
         });
 
         describe('/ 3. Game - methods for computer', () => {
@@ -238,17 +224,21 @@ describe('Rock, Paper, Stone Game - GameComponent (container component)', () => 
 
           /** vvv--- New Specs vvv--- ---___---===---___---===---___---===---___---===---___---===---___---===---___---===---___---===*/
 
+          it('"setComputersChoice()" should set property "restartIsActive" to true', () => {
+            const app = fixture.debugElement.componentInstance;
+            app.setComputersChoice();
+            expect(app.restartIsActive).toBe(true);
+          });
+
           it('should have a method "lookup()"', () => {
             fixture.detectChanges();
             const app = fixture.debugElement.componentInstance;
-            // let = 4;
             expect(app.lookup).not.toBe(undefined);
           });
 
           it('"lookup()" should return 5 for 4 or 9 for 5', () => {
             fixture.detectChanges();
             const app = fixture.debugElement.componentInstance;
-            // fixture.detectChanges();
             expect(app.lookup(1)).toBe(1);
             expect(app.lookup(2)).toBe(2);
             expect(app.lookup(3)).toBe(3);

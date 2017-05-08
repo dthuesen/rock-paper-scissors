@@ -1,0 +1,22 @@
+<md-card class="background-middle-dark">
+  <h2 class="light-text ranchers-2-dark">Meinen Score speichern</h2>
+
+  <form (ngSubmit)="savePlayer(form.value)" name="form" #form="ngForm">
+
+    <md-input-container>
+      <input type="text" 
+             name="name" 
+             mdInput 
+             placeholder="Name" 
+             #name="ngModel"
+             ngModel 
+             required>
+    </md-input-container>
+
+    <button id="save" md-raised-button type="submit" [disabled]="!form.valid">Score speichern</button>
+
+  </form>
+
+  <button id="abort" md-raised-button (click)="emitPlayerData()">Abbrechen</button>
+
+</md-card>
